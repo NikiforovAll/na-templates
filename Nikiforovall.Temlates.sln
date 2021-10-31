@@ -52,7 +52,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\release-drafter.yml = .github\workflows\release-drafter.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NikiforovAll.Templates", "src\NikiforovAll.Templates.csproj", "{761522F4-0D20-4FB9-86DF-581A61FB9499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NikiforovAll.CleanArchitecture.Templates", "src\NikiforovAll.CleanArchitecture.Templates.csproj", "{761522F4-0D20-4FB9-86DF-581A61FB9499}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Templates.Tests", "tests\Templates.Tests.csproj", "{0E260998-D8DA-45DD-BFB9-77E3A104BEF5}"
 EndProject
