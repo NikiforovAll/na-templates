@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-dotnet new --install CodingStories.Templates
+dotnet new --install NikiforovAll.CleanArchitecture.Templates
 ```
 
 ## Overview
@@ -16,6 +16,7 @@ The engine itself `dotnet new` provides information about possible configuration
 
 ```bash
 dotnet new na-ca -h
+dotnet new na-es -h
 ```
 
 ### Usage

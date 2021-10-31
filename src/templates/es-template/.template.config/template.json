@@ -2,17 +2,18 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Oleksii Nikiforov",
   "classifications": [
+    "EventSourcing",
     "CleanArchitecture",
     "DDD",
     "Template"
   ],
-  "identity": "NikiforovAll.CleanArchitecture.Template",
+  "identity": "NikiforovAll.EventSourcing.Template",
   "name": "Clean Architecture [na-ca]",
-  "description": "Creates a solution that follows Clean Architecture and DDD principles.",
-  "shortName": "na-ca",
-  "sourceName": "Nikiforovall.CA.Template",
+  "description": "Creates a solution that follows EventSourcing, Clean Architecture, and DDD principles.",
+  "shortName": "na-es",
+  "sourceName": "Nikiforovall.ES.Template",
   "preferNameDirectory": true,
-  "defaultName": "clean-architecture",
+  "defaultName": "es-clean-architecture",
   "tags": {
     "language": "C#",
     "type": "project"
