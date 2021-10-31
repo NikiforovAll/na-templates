@@ -1,0 +1,25 @@
+<Project>
+
+  <PropertyGroup Label="Build">
+    <LangVersion>latest</LangVersion>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <Authors>Oleksii Nikiforov</Authors>
+    <Copyright>Copyright © Oleksii Nikiforov. All rights Reserved</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/NikiforovAll/na-templates</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NikiforovAll/na-templates.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/NikiforovAll/na-templates/releases</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="MinVer" PrivateAssets="all" Version="2.4.0" />
+  </ItemGroup>
+
+</Project>

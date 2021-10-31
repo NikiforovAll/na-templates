@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Oleksii Nikiforov",
+  "classifications": [
+    "CleanArchitecture",
+    "DDD",
+    "Template"
+  ],
+  "identity": "NikiforovAll.CleanArchitecture.Template",
+  "name": "Clean Architecture [na-ca]",
+  "description": "A solution and project for creating a project that follows Clean Architecture and DDD principles.",
+  "shortName": "na-ca",
+  "sourceName": "Nikiforovall.CA.Template",
+  "preferNameDirectory": true,
+  "defaultName": "clean-architecture",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {},
+  "guids": [
+    "9A19103F-16F7-4668-BE54-9A1E7A4F7556",
+    "724D5EE1-C2C3-42E3-8BAE-D75E57BA3CD8",
+    "C7E89A3E-A631-4760-8D61-BD1EAB1C4E69",
+    "34C0FACD-F3D9-400C-8945-554DD6B0819A",
+    "117DA02F-5274-4565-ACC6-DA9B6E568B09",
+    "664D406C-2F83-48F0-BFC3-408D5CB53C65",
+    "31A6EE71-2290-421A-9C75-24121B973C14",
+    "277029AF-D9E1-4B75-9F11-48FEA7345AD7",
+    "968545AE-9FCC-4CA6-9DB0-70B3FC27EB8B",
+    "76872C40-E56B-4335-95E1-624F3AC3A61F",
+    "9B0A2C60-1496-40E2-B9A2-090B8E5FD1DD",
+    "E53339B2-1760-4266-BCC7-CA923CBCF16C",
+    "0DE34D03-20E5-4F2B-A95E-5076B1DD1615",
+    "8B36AAE7-ED73-4403-B362-6F8DCD3D67FD",
+    "1C6950DC-C416-410A-98C8-0B39F2A07D59",
+    "BBD19544-8402-40DA-987E-38CF0522DAEE",
+    "6A57C916-8E9F-4896-A305-3482D9E2B7A9"
+  ],
+  "sources": [],
+  "postActions": []
+}
