@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: src/Api/Dockerfile
+
+  worker:
+    image: ${DOCKER_REGISTRY-}worker
+    build:
+      context: .
+      dockerfile: src/Worker/Dockerfile
+
