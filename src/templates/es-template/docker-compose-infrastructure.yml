@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14.0
+    hostname: postgres
+    volumes:
+      - postgresdata-naca:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    hostname: rabbitmq
+    volumes:
+      - rabbitmqdata-naca:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+      - "15692:15692"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
+  seq:
+    image: datalust/seq:2021.2
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:80
+    volumes:
+      - seq-naca:/data
+
+volumes:
+  rabbitmqdata-naca:
+    driver: local
+  postgresdata-naca:
+    driver: local
+  seq-naca:
+    driver: local
+

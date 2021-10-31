@@ -1,0 +1,38 @@
+// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
+
+namespace Nikiforovall.ES.Template.Application.IntegrationTests.Projects.Commands;
+
+using Nikiforovall.ES.Template.Application.Projects.Commands.CreateProject;
+using Nikiforovall.ES.Template.Application.SharedKernel.Exceptions;
+using Nikiforovall.ES.Template.Domain.ProjectAggregate;
+
+[Trait("Category", "Integration")]
+public class CreateProjectCommandTests
+{
+    [Theory]
+    [InlineAutoData("")]
+    [InlineAutoData("a")]
+    [InlineAutoData("aa")]
+    public async Task NameIsTooShort_ExceptionThrownAsync(string invalidName, CreateProjectCommand command)
+    {
+        command.Name = invalidName;
+        await FluentActions.Invoking(() =>
+            SendAsync(command)).Should().ThrowAsync<ValidationException>();
+    }
+
+
+    [Theory, AutoData]
+    public async Task ValidCommand_ProjectCreated(CreateProjectCommand command)
+    {
+        var project = await SendAsync(command);
+
+        var entity = await FindAsync<Project>(project.Id);
+
+        entity.Should().NotBeNull();
+        entity.Name.Should().Be(command.Name);
+        entity.Status.Should().Be(ProjectStatus.Complete);
+        entity.Items.Should().BeEmpty();
+        entity.Created.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+    }
+}

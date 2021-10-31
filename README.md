@@ -1,8 +1,10 @@
-# Coding Stories Template
+# NikiforovAll.CleanArchitecture.Templates
 
 [![GitHub Actions Status](https://github.com/NikiforovAll/na-templates/workflows/Build/badge.svg?branch=main)](https://github.com/NikiforovAll/na-templates/actions)
 
 [![GitHub Actions Build History](https://buildstats.info/github/chart/nikiforovall/na-templates?branch=main&includeBuildsFromPullRequest=false)](https://github.com/NikiforovAll/na-templates/actions)
+
+A collection of template for rapid development of enterprise applications.
 
 ## Install
 

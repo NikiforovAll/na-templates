@@ -6,13 +6,13 @@ using Xunit;
 using Xunit.Abstractions;
 
 [Trait("Temlate", "CSharp")]
-public class TemplatesTests
+public class EventSourcingTemplateTests
 {
-    private const string TemplateName = "na-ca";
-    private const string SolutionFileName = "NikiforovAll.CleanArchitecture.Template.sln";
+    private const string TemplateName = "na-es";
+    private const string SolutionFileName = "NikiforovAll.EventSourcing.Template.sln";
     private static readonly string[] DefaultArguments = Array.Empty<string>();
 
-    public TemplatesTests(ITestOutputHelper testOutputHelper)
+    public EventSourcingTemplateTests(ITestOutputHelper testOutputHelper)
     {
         if (testOutputHelper is null)
         {
@@ -23,7 +23,7 @@ public class TemplatesTests
     }
 
     [Theory]
-    [InlineData("Demo")]
+    [InlineData("demo-es")]
     public async Task DefaultTemplate(string name, params string[] arguments)
     {
         await InstallTemplateAsync().ConfigureAwait(false);
@@ -53,5 +53,5 @@ public class TemplatesTests
         Assert.True(File.Exists(Path.Combine(project.DirectoryPath, "README.md")));
     }
 
-    private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<TemplatesTests>(SolutionFileName);
+    private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<EventSourcingTemplateTests>(SolutionFileName);
 }

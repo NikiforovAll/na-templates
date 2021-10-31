@@ -1,0 +1,1 @@
+# Nikiforovall.ES.Template.Worker

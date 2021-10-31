@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Nikiforovall.ES.Template.Tests.Common</RootNamespace>
+    <AssemblyName>Nikiforovall.ES.Template.Tests.Common</AssemblyName>
+    <TestUtils>true</TestUtils>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>
