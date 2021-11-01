@@ -1,10 +1,21 @@
 # NikiforovAll.CleanArchitecture.Templates
 
 [![GitHub Actions Status](https://github.com/NikiforovAll/na-templates/workflows/Build/badge.svg?branch=main)](https://github.com/NikiforovAll/na-templates/actions)
+[![NuGet](https://img.shields.io/nuget/dt/NikiforovAll.CleanArchitecture.Templates.svg)](http://nuget.org/packages/NikiforovAll.CleanArchitecture.Templates)
+[![NuGet](https://img.shields.io/nuget/v/NikiforovAll.CleanArchitecture.Templates.svg)](https://www.nuget.org/packages/NikiforovAll.CleanArchitecture.Templates/)
+[![NuGet](https://img.shields.io/nuget/vpre/NikiforovAll.CleanArchitecture.Templates.svg)](https://www.nuget.org/packages/NikiforovAll.CleanArchitecture.Templates/)
 
 [![GitHub Actions Build History](https://buildstats.info/github/chart/nikiforovall/na-templates?branch=main&includeBuildsFromPullRequest=false)](https://github.com/NikiforovAll/na-templates/actions)
 
-A collection of templates for the rapid development of enterprise applications. (Clean Architecture, DDD, Event Sourcing)
+| Template | Status                                                                                                                                                      |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| na-ca    | [![.NET](https://github.com/NikiforovAll/na-ca/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NikiforovAll/na-ca/actions/workflows/dotnet.yml) |
+| na-es    | [![.NET](https://github.com/NikiforovAll/na-es/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NikiforovAll/na-es/actions/workflows/dotnet.yml) |
+| na-bu    | N/A                                                                                                                                                         |
+
+---
+
+> A collection of templates for the rapid development of enterprise applications. (Clean Architecture, DDD, Event Sourcing)
 
 ## Install
 
