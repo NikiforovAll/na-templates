@@ -4,13 +4,16 @@
 
 [![GitHub Actions Build History](https://buildstats.info/github/chart/nikiforovall/na-templates?branch=main&includeBuildsFromPullRequest=false)](https://github.com/NikiforovAll/na-templates/actions)
 
-A collection of template for rapid development of enterprise applications.
+A collection of templates for the rapid development of enterprise applications. (Clean Architecture, DDD, Event Sourcing)
 
 ## Install
 
 ```bash
 dotnet new --install NikiforovAll.CleanArchitecture.Templates
 ```
+
+* <https://github.com/NikiforovAll/na-ca>
+* <https://github.com/NikiforovAll/na-es>
 
 ## Overview
 
