@@ -1,13 +1,13 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Infrastructure.Persistence.Repository;
+namespace NikiforovAll.ES.Template.Infrastructure.Persistence.Repository;
 
 using Marten;
 using Microsoft.Extensions.Logging;
-using Nikiforovall.ES.Template.Application.SharedKernel.Events;
-using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
-using Nikiforovall.ES.Template.Domain.SharedKernel.Aggregates;
+using NikiforovAll.ES.Template.Application.SharedKernel.Events;
+using NikiforovAll.ES.Template.Application.SharedKernel.Repositories;
+using NikiforovAll.ES.Template.Domain.SharedKernel.Aggregates;
 
 public class MartenRepository<T> : IRepository<T> where T : class, IAggregate
 {

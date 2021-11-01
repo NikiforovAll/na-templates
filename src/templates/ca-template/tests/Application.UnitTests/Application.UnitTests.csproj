@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Nikiforovall.CA.Template.Domain.UnitTests</RootNamespace>
-    <AssemblyName>Nikiforovall.CA.Template.Domain.UnitTests</AssemblyName>
+    <RootNamespace>NikiforovAll.CA.Template.Domain.UnitTests</RootNamespace>
+    <AssemblyName>NikiforovAll.CA.Template.Domain.UnitTests</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

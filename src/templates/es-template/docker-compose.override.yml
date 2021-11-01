@@ -5,6 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - EventStore__ConnectionString=PORT = 5432; HOST = host.docker.internal; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = 'es-template-db'; PASSWORD = 'postgres'; USER ID = 'postgres'
     ports:
       - "5001:443"
       - "5000:80"
@@ -13,4 +14,5 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   worker:
     environment:
-        - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_ENVIRONMENT=Development
+      - EventStore__ConnectionString=PORT = 5432; HOST = host.docker.internal; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = 'es-template-db'; PASSWORD = 'postgres'; USER ID = 'postgres'

@@ -9,10 +9,10 @@ using System.CommandLine.Parsing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nikiforovall.ES.Template.Application;
-using Nikiforovall.ES.Template.Console;
-using Nikiforovall.ES.Template.Console.Commands.SeedCommands;
-using Nikiforovall.ES.Template.Infrastructure;
+using NikiforovAll.ES.Template.Application;
+using NikiforovAll.ES.Template.Console;
+using NikiforovAll.ES.Template.Console.Commands.SeedCommands;
+using NikiforovAll.ES.Template.Infrastructure;
 using Serilog;
 
 var runner = BuildCommandLine()

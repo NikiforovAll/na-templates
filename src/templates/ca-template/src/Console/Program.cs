@@ -9,11 +9,11 @@ using System.CommandLine.Parsing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nikiforovall.CA.Template.Application;
-using Nikiforovall.CA.Template.Console;
-using Nikiforovall.CA.Template.Console.Commands.Migrate;
-using Nikiforovall.CA.Template.Console.Commands.SeedCommands;
-using Nikiforovall.CA.Template.Infrastructure;
+using NikiforovAll.CA.Template.Application;
+using NikiforovAll.CA.Template.Console;
+using NikiforovAll.CA.Template.Console.Commands.Migrate;
+using NikiforovAll.CA.Template.Console.Commands.SeedCommands;
+using NikiforovAll.CA.Template.Infrastructure;
 using Serilog;
 
 var runner = BuildCommandLine()

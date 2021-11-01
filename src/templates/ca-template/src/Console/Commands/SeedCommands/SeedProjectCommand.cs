@@ -1,12 +1,12 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Console.Commands.SeedCommands;
+namespace NikiforovAll.CA.Template.Console.Commands.SeedCommands;
 
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using Microsoft.Extensions.Logging;
-using Nikiforovall.CA.Template.Application.Interfaces;
+using NikiforovAll.CA.Template.Application.Interfaces;
 using Spectre.Console;
 
 public class SeedProjectCommand : Command

@@ -2,13 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Nikiforovall.CA.Template.Api</RootNamespace>
+    <RootNamespace>NikiforovAll.CA.Template.Api</RootNamespace>
+    <AssemblyName>NikiforovAll.CA.Template.Api</AssemblyName>
     <IsPackable>true</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>501afc9d-0518-4c2b-97ac-81afcd8530db</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

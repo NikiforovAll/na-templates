@@ -1,8 +1,8 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-using Nikiforovall.ES.Template.Api;
-using Nikiforovall.ES.Template.Infrastructure;
+using NikiforovAll.ES.Template.Api;
+using NikiforovAll.ES.Template.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

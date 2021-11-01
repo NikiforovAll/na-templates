@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Nikiforovall.CA.Template.Tests.Common</RootNamespace>
-    <AssemblyName>Nikiforovall.CA.Template.Tests.Common</AssemblyName>
+    <RootNamespace>NikiforovAll.CA.Template.Tests.Common</RootNamespace>
+    <AssemblyName>NikiforovAll.CA.Template.Tests.Common</AssemblyName>
     <TestUtils>true</TestUtils>
   </PropertyGroup>
 

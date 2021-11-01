@@ -5,6 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=host.docker.internal;Database=ca-template-db;Pooling=true;
     ports:
       - "5001:443"
       - "5000:80"
@@ -13,4 +14,5 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   worker:
     environment:
-        - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=host.docker.internal;Database=ca-template-db;Pooling=true;

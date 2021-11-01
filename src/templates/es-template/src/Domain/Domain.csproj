@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Nikiforovall.ES.Template.Domain</RootNamespace>
+    <RootNamespace>NikiforovAll.ES.Template.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

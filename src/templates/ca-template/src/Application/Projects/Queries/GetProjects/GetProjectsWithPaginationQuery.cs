@@ -1,16 +1,16 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Application.Projects.Queries.GetProjects;
+namespace NikiforovAll.CA.Template.Application.Projects.Queries.GetProjects;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Nikiforovall.CA.Template.Application.Interfaces;
-using Nikiforovall.CA.Template.Application.Projects.Models;
-using Nikiforovall.CA.Template.Application.SharedKernel.Mappings;
-using Nikiforovall.CA.Template.Application.SharedKernel.Models;
+using NikiforovAll.CA.Template.Application.Interfaces;
+using NikiforovAll.CA.Template.Application.Projects.Models;
+using NikiforovAll.CA.Template.Application.SharedKernel.Mappings;
+using NikiforovAll.CA.Template.Application.SharedKernel.Models;
 
 public class GetProjectsWithPaginationQuery : IRequest<PaginatedList<ProjectSummaryViewModel>>
 {

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Nikiforovall.ES.Template.Common</RootNamespace>
+    <RootNamespace>NikiforovAll.ES.Template.Common</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

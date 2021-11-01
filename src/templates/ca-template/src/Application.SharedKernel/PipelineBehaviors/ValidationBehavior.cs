@@ -1,13 +1,13 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Application.SharedKernel.PipelineBehaviors;
+namespace NikiforovAll.CA.Template.Application.SharedKernel.PipelineBehaviors;
 
 using Application.SharedKernel.Utils;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Nikiforovall.CA.Template.Application.SharedKernel;
+using NikiforovAll.CA.Template.Application.SharedKernel;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

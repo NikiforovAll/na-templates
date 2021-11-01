@@ -1,14 +1,14 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Infrastructure;
+namespace NikiforovAll.CA.Template.Infrastructure;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nikiforovall.CA.Template.Application.Interfaces;
-using Nikiforovall.CA.Template.Application.SharedKernel.Interfaces;
-using Nikiforovall.CA.Template.Infrastructure.Persistence;
+using NikiforovAll.CA.Template.Application.Interfaces;
+using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
+using NikiforovAll.CA.Template.Infrastructure.Persistence;
 
 public static class ServiceCollectionExtensions
 {

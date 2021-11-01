@@ -7,7 +7,11 @@
 * [MediatR](https://github.com/jbogard/MediatR)
 * [AutoMapper](https://automapper.org/)
 * [FluentValidation](https://fluentvalidation.net/)
-* [XUnit](https://xunit.net/), [FluentAssertions](https://fluentassertions.com/), [Moq](https://github.com/moq), [AutoFixture](https://github.com/AutoFixture/AutoFixture), [Respawn](https://github.com/jbogard/Respawn)
+* [XUnit](https://xunit.net/)
+* [FluentAssertions](https://fluentassertions.com/)
+* [Moq](https://github.com/moq)
+* [AutoFixture](https://github.com/AutoFixture/AutoFixture)
+* [Respawn](https://github.com/jbogard/Respawn)
 * [Docker](https://www.docker.com/)
 
 ## Principles
@@ -59,12 +63,11 @@ TODO: [X] Add Console seeding implementation
 TODO: [X] Add Marten.Console
 TODO: [] add github ci
 TODO: [] finish readme
-TODO: [] dockerize
+TODO: [X] dockerize
 TODO: [] add mass transit integration example for worker (optional)
 TODO: [] add example of application service, e.g: message broker publisher
 TODO: [] clear warnings
 TODO: [] ensure nullability (e.g: dtos)
-TODO: [] dockerize integration tests
 TODO: [] add diagram for solution structure, add docs about DDD, CQRS, Clean Architecture (typescript CA/DDD project has nice diagram)
 TODO: [] add getting started guide: how to setup project, create and seed database, etc.
 TODO: [] TreatWarningsAsErrors

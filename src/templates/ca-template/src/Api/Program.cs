@@ -2,8 +2,8 @@
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 
-using Nikiforovall.CA.Template.Api;
-using Nikiforovall.CA.Template.Infrastructure;
+using NikiforovAll.CA.Template.Api;
+using NikiforovAll.CA.Template.Infrastructure;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

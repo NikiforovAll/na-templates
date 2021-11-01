@@ -12,5 +12,8 @@ declare -A FOLDERS=(
 
 for REPOSITORY in ${REPOSITORIES[*]}
 do
-  rm -rf "${FOLDERS[$REPOSITORY]}"
+    case "$1" in
+    -g) rm -rf "${FOLDERS[$REPOSITORY]}"/.git ;;
+    *) rm -rf "${FOLDERS[$REPOSITORY]}" ;;
+    esac
 done

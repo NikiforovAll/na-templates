@@ -1,7 +1,7 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Application.IntegrationTests;
+namespace NikiforovAll.ES.Template.Application.IntegrationTests;
 
 using Marten;
 using Marten.Events.Projections;
@@ -11,13 +11,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Nikiforovall.ES.Template.Api;
-using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
-using Nikiforovall.ES.Template.Domain.ProjectAggregate;
-using Nikiforovall.ES.Template.Domain.SharedKernel.Aggregates;
-using Nikiforovall.ES.Template.Infrastructure;
-using Nikiforovall.ES.Template.Infrastructure.Persistence;
-using Nikiforovall.ES.Template.Infrastructure.Persistence.Projections;
+using NikiforovAll.ES.Template.Api;
+using NikiforovAll.ES.Template.Application.SharedKernel.Repositories;
+using NikiforovAll.ES.Template.Domain.ProjectAggregate;
+using NikiforovAll.ES.Template.Domain.SharedKernel.Aggregates;
+using NikiforovAll.ES.Template.Infrastructure;
+using NikiforovAll.ES.Template.Infrastructure.Persistence;
+using NikiforovAll.ES.Template.Infrastructure.Persistence.Projections;
 using Npgsql;
 using Respawn;
 using IDocumentStore = Marten.IDocumentStore;

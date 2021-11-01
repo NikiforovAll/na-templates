@@ -1,22 +1,22 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Infrastructure;
+namespace NikiforovAll.ES.Template.Infrastructure;
 
 using Infrastructure.Services;
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Nikiforovall.ES.Template.Application.SharedKernel.Events;
-using Nikiforovall.ES.Template.Application.SharedKernel.Events.External;
-using Nikiforovall.ES.Template.Application.SharedKernel.Interfaces;
-using Nikiforovall.ES.Template.Application.SharedKernel.Interfaces.IdGeneration;
-using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
-using Nikiforovall.ES.Template.Domain.ProjectAggregate;
-using Nikiforovall.ES.Template.Infrastructure.Ids;
-using Nikiforovall.ES.Template.Infrastructure.Persistence;
-using Nikiforovall.ES.Template.Infrastructure.Persistence.Repository;
+using NikiforovAll.ES.Template.Application.SharedKernel.Events;
+using NikiforovAll.ES.Template.Application.SharedKernel.Events.External;
+using NikiforovAll.ES.Template.Application.SharedKernel.Interfaces;
+using NikiforovAll.ES.Template.Application.SharedKernel.Interfaces.IdGeneration;
+using NikiforovAll.ES.Template.Application.SharedKernel.Repositories;
+using NikiforovAll.ES.Template.Domain.ProjectAggregate;
+using NikiforovAll.ES.Template.Infrastructure.Ids;
+using NikiforovAll.ES.Template.Infrastructure.Persistence;
+using NikiforovAll.ES.Template.Infrastructure.Persistence.Repository;
 using Weasel.Core;
 using Weasel.Postgresql;
 using IApplicationDocumentStore = Application.SharedKernel.Repositories.IDocumentStore;

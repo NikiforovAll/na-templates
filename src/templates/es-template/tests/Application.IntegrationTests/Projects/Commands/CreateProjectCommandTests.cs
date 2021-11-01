@@ -1,11 +1,11 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Application.IntegrationTests.Projects.Commands;
+namespace NikiforovAll.ES.Template.Application.IntegrationTests.Projects.Commands;
 
-using Nikiforovall.ES.Template.Application.Projects.Commands.CreateProject;
-using Nikiforovall.ES.Template.Application.SharedKernel.Exceptions;
-using Nikiforovall.ES.Template.Domain.ProjectAggregate;
+using NikiforovAll.ES.Template.Application.Projects.Commands.CreateProject;
+using NikiforovAll.ES.Template.Application.SharedKernel.Exceptions;
+using NikiforovAll.ES.Template.Domain.ProjectAggregate;
 
 [Trait("Category", "Integration")]
 public class CreateProjectCommandTests

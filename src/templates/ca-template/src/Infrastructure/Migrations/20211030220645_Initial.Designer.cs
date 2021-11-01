@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Nikiforovall.CA.Template.Infrastructure.Persistence;
+using NikiforovAll.CA.Template.Infrastructure.Persistence;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Nikiforovall.CA.Template.Infrastructure.Migrations
+namespace NikiforovAll.CA.Template.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20211030220645_Initial")]
@@ -24,7 +24,7 @@ namespace Nikiforovall.CA.Template.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Nikiforovall.CA.Template.Domain.ProjectAggregate.Project", b =>
+            modelBuilder.Entity("NikiforovAll.CA.Template.Domain.ProjectAggregate.Project", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace Nikiforovall.CA.Template.Infrastructure.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Nikiforovall.CA.Template.Domain.ProjectAggregate.ToDoItem", b =>
+            modelBuilder.Entity("NikiforovAll.CA.Template.Domain.ProjectAggregate.ToDoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,9 +81,9 @@ namespace Nikiforovall.CA.Template.Infrastructure.Migrations
                     b.ToTable("ToDoItems");
                 });
 
-            modelBuilder.Entity("Nikiforovall.CA.Template.Domain.ProjectAggregate.Project", b =>
+            modelBuilder.Entity("NikiforovAll.CA.Template.Domain.ProjectAggregate.Project", b =>
                 {
-                    b.OwnsOne("Nikiforovall.CA.Template.Domain.ValueObjects.Colour", "Colour", b1 =>
+                    b.OwnsOne("NikiforovAll.CA.Template.Domain.ValueObjects.Colour", "Colour", b1 =>
                         {
                             b1.Property<Guid>("ProjectId")
                                 .HasColumnType("uuid");
@@ -104,14 +104,14 @@ namespace Nikiforovall.CA.Template.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nikiforovall.CA.Template.Domain.ProjectAggregate.ToDoItem", b =>
+            modelBuilder.Entity("NikiforovAll.CA.Template.Domain.ProjectAggregate.ToDoItem", b =>
                 {
-                    b.HasOne("Nikiforovall.CA.Template.Domain.ProjectAggregate.Project", null)
+                    b.HasOne("NikiforovAll.CA.Template.Domain.ProjectAggregate.Project", null)
                         .WithMany("Items")
                         .HasForeignKey("ProjectId");
                 });
 
-            modelBuilder.Entity("Nikiforovall.CA.Template.Domain.ProjectAggregate.Project", b =>
+            modelBuilder.Entity("NikiforovAll.CA.Template.Domain.ProjectAggregate.Project", b =>
                 {
                     b.Navigation("Items");
                 });

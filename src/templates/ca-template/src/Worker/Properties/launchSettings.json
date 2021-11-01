@@ -1,13 +1,13 @@
 {
   "profiles": {
-    "Nikiforovall.CA.Template.Worker": {
+    "NikiforovAll.CA.Template.Worker": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true"
     },
-    "Nikiforovall.CA.Template.Worker - Production": {
+    "NikiforovAll.CA.Template.Worker - Production": {
       "commandName": "Project",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Production"

@@ -1,11 +1,11 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Domain.UnitTests;
+namespace NikiforovAll.ES.Template.Domain.UnitTests;
 
 using FluentAssertions;
-using Nikiforovall.ES.Template.Domain.Exceptions;
-using Nikiforovall.ES.Template.Domain.ValueObjects;
+using NikiforovAll.ES.Template.Domain.Exceptions;
+using NikiforovAll.ES.Template.Domain.ValueObjects;
 
 public class ColourTests
 {

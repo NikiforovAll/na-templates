@@ -1,17 +1,17 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Infrastructure.Persistence;
+namespace NikiforovAll.CA.Template.Infrastructure.Persistence;
 
 using System.Data;
 using System.Reflection;
 using Infrastructure.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Nikiforovall.CA.Template.Application.Interfaces;
-using Nikiforovall.CA.Template.Application.SharedKernel.Interfaces;
-using Nikiforovall.CA.Template.Domain.ProjectAggregate;
-using Nikiforovall.CA.Template.Domain.SharedKernel;
+using NikiforovAll.CA.Template.Application.Interfaces;
+using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
+using NikiforovAll.CA.Template.Domain.ProjectAggregate;
+using NikiforovAll.CA.Template.Domain.SharedKernel;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {

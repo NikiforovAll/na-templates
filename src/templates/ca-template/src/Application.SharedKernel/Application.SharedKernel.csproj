@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Nikiforovall.CA.Template.Application.SharedKernel</RootNamespace>
+    <RootNamespace>NikiforovAll.CA.Template.Application.SharedKernel</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

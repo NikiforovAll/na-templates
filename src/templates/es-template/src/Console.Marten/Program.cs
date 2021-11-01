@@ -5,7 +5,7 @@
 // Use `dotnet run -- help` for more details.
 
 using Microsoft.Extensions.Hosting;
-using Nikiforovall.ES.Template.Infrastructure;
+using NikiforovAll.ES.Template.Infrastructure;
 using Oakton;
 
 await Host.CreateDefaultBuilder(args)

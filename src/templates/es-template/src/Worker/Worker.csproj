@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Nikiforovall.ES.Template.Worker</RootNamespace>
+    <RootNamespace>NikiforovAll.ES.Template.Worker</RootNamespace>
+    <AssemblyName>NikiforovAll.ES.Template.Worker</AssemblyName>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>

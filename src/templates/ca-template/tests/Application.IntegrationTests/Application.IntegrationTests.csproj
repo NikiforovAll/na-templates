@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Nikiforovall.CA.Template.Application.IntegrationTests</RootNamespace>
+    <RootNamespace>NikiforovAll.CA.Template.Application.IntegrationTests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Nikiforovall.CA.Template.Application.IntegrationTests.SliceFixture" Static="true" />
+    <Using Include="NikiforovAll.CA.Template.Application.IntegrationTests.SliceFixture" Static="true" />
   </ItemGroup>
 
 </Project>

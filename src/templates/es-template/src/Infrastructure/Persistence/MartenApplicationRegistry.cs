@@ -1,12 +1,12 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Infrastructure.Persistence;
+namespace NikiforovAll.ES.Template.Infrastructure.Persistence;
 
 using Marten;
 using Marten.Events.Projections;
-using Nikiforovall.ES.Template.Domain.ProjectAggregate;
-using Nikiforovall.ES.Template.Infrastructure.Persistence.Projections;
+using NikiforovAll.ES.Template.Domain.ProjectAggregate;
+using NikiforovAll.ES.Template.Infrastructure.Persistence.Projections;
 
 public class MartenApplicationRegistry : MartenRegistry
 {

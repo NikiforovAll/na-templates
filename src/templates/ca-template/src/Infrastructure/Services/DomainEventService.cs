@@ -1,15 +1,15 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Infrastructure.Services;
+namespace NikiforovAll.CA.Template.Infrastructure.Services;
 
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Nikiforovall.CA.Template.Application.SharedKernel;
-using Nikiforovall.CA.Template.Application.SharedKernel.Interfaces;
-using Nikiforovall.CA.Template.Application.SharedKernel.Models;
-using Nikiforovall.CA.Template.Domain.SharedKernel;
+using NikiforovAll.CA.Template.Application.SharedKernel;
+using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
+using NikiforovAll.CA.Template.Application.SharedKernel.Models;
+using NikiforovAll.CA.Template.Domain.SharedKernel;
 
 public class DomainEventService : IDomainEventService
 {

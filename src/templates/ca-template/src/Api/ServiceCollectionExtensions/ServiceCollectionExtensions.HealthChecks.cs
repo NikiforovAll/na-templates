@@ -1,11 +1,11 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Api;
+namespace NikiforovAll.CA.Template.Api;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Nikiforovall.CA.Template.Infrastructure.Persistence;
+using NikiforovAll.CA.Template.Infrastructure.Persistence;
 
 internal static partial class ServiceCollectionExtensions
 {

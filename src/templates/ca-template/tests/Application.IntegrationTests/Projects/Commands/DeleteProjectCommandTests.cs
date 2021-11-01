@@ -1,13 +1,13 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Application.IntegrationTests.Projects.Commands;
+namespace NikiforovAll.CA.Template.Application.IntegrationTests.Projects.Commands;
 
-using Nikiforovall.CA.Template.Application.Projects.Commands.CreateProject;
-using Nikiforovall.CA.Template.Application.Projects.Commands.DeleteProject;
-using Nikiforovall.CA.Template.Application.SharedKernel.Exceptions;
-using Nikiforovall.CA.Template.Domain.ProjectAggregate;
-using Nikiforovall.CA.Template.Tests.Common;
+using NikiforovAll.CA.Template.Application.Projects.Commands.CreateProject;
+using NikiforovAll.CA.Template.Application.Projects.Commands.DeleteProject;
+using NikiforovAll.CA.Template.Application.SharedKernel.Exceptions;
+using NikiforovAll.CA.Template.Domain.ProjectAggregate;
+using NikiforovAll.CA.Template.Tests.Common;
 
 [Trait("Category", "Integration")]
 public class DeleteProjectCommandTests : IntegrationTestBase

@@ -1,13 +1,13 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Api.Filters;
+namespace NikiforovAll.ES.Template.Api.Filters;
 
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Nikiforovall.ES.Template.Application.SharedKernel.Exceptions;
+using NikiforovAll.ES.Template.Application.SharedKernel.Exceptions;
 
 internal class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

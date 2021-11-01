@@ -1,7 +1,7 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.ES.Template.Api;
+namespace NikiforovAll.ES.Template.Api;
 
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nikiforovall.ES.Template.Api.Filters;
-using Nikiforovall.ES.Template.Api.Formatters.FluentValidation;
-using Nikiforovall.ES.Template.Api.Services;
-using Nikiforovall.ES.Template.Application;
-using Nikiforovall.ES.Template.Application.SharedKernel.Interfaces;
-using Nikiforovall.ES.Template.Infrastructure;
+using NikiforovAll.ES.Template.Api.Filters;
+using NikiforovAll.ES.Template.Api.Formatters.FluentValidation;
+using NikiforovAll.ES.Template.Api.Services;
+using NikiforovAll.ES.Template.Application;
+using NikiforovAll.ES.Template.Application.SharedKernel.Interfaces;
+using NikiforovAll.ES.Template.Infrastructure;
 
 #pragma warning disable IDE0058 // Expression value is never used
 internal class Startup

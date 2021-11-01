@@ -1,7 +1,7 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace Nikiforovall.CA.Template.Application.IntegrationTests;
+namespace NikiforovAll.CA.Template.Application.IntegrationTests;
 
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -10,8 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Nikiforovall.CA.Template.Api;
-using Nikiforovall.CA.Template.Infrastructure.Persistence;
+using NikiforovAll.CA.Template.Api;
+using NikiforovAll.CA.Template.Infrastructure.Persistence;
 using Npgsql;
 using Respawn;
 

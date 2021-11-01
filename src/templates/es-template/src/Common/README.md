@@ -1,1 +1,1 @@
-# Nikiforovall.ES.Template.Common
+# NikiforovAll.ES.Template.Common
