@@ -1,30 +1,87 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Infrastructure;
+
 using Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
+using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nikiforovall.ES.Template.Application.Interfaces;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Nikiforovall.ES.Template.Application.SharedKernel.Events;
+using Nikiforovall.ES.Template.Application.SharedKernel.Events.External;
 using Nikiforovall.ES.Template.Application.SharedKernel.Interfaces;
+using Nikiforovall.ES.Template.Application.SharedKernel.Interfaces.IdGeneration;
+using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
+using Nikiforovall.ES.Template.Domain.ProjectAggregate;
+using Nikiforovall.ES.Template.Infrastructure.Ids;
 using Nikiforovall.ES.Template.Infrastructure.Persistence;
+using Nikiforovall.ES.Template.Infrastructure.Persistence.Repository;
+using Weasel.Core;
+using Weasel.Postgresql;
+using IApplicationDocumentStore = Application.SharedKernel.Repositories.IDocumentStore;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IIdGenerator, MartenIdGenerator>();
+        services.AddMarten(configuration, options => options.ConfigureEventStoreSnapshoting());
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+        services.AddScoped<IRepository<Project>, MartenRepository<Project>>();
+        services.AddScoped<IApplicationDocumentStore, MartenDocumentStore>();
 
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
-
-        services.AddScoped<IDomainEventService, DomainEventService>();
+        services.TryAddScoped<IEventBus, EventBus>();
+        services.TryAddScoped<IExternalEventProducer, DummyExternalEventsProducer>();
 
         services.AddTransient<IDateTime, DateTimeService>();
 
         return services;
     }
+
+    private const string DefaultConfigKey = "EventStore";
+
+    public static IServiceCollection AddMarten(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Action<StoreOptions> configureOptions = null,
+        string configKey = DefaultConfigKey)
+    {
+        var martenConfig = GetMartenConfig(configuration, configKey);
+
+        var documentStore = services
+            .AddMarten(options =>
+            {
+                options.Connection(martenConfig.ConnectionString);
+                options.AutoCreateSchemaObjects = AutoCreate.CreateOrUpdate;
+
+                options.Events.DatabaseSchemaName = martenConfig.WriteModelSchema;
+                options.DatabaseSchemaName = martenConfig.ReadModelSchema;
+
+                options.UseDefaultSerialization(
+                    nonPublicMembersStorage: NonPublicMembersStorage.NonPublicSetters,
+                    enumStorage: EnumStorage.AsString);
+                options.Projections.AsyncMode = martenConfig.DaemonMode;
+
+                options.Schema.Include<MartenApplicationRegistry>();
+
+                configureOptions?.Invoke(options);
+            })
+            .UseLightweightSessions()
+            .InitializeStore();
+
+        // Migration
+        MartenConfigurationExtensions.SetupSchema(documentStore, martenConfig, 1);
+
+        return services;
+    }
+
+    public static void ConfigureEventStoreSnapshoting(this StoreOptions options) =>
+        MartenApplicationRegistry.RegisterProjections(options);
+
+    private static MartenConfiguration GetMartenConfig(
+        IConfiguration configuration, string configKey = DefaultConfigKey) => configuration
+            .GetSection(configKey)
+            .Get<MartenConfiguration>();
 }

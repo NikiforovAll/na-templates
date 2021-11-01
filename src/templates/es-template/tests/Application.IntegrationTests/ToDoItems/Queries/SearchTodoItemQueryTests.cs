@@ -1,4 +1,4 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Application.IntegrationTests.ToDoItems.Queries;
@@ -55,15 +55,24 @@ public class SearchTodoItemQueryTests : IntegrationTestBase
     }
 
     [Theory, AutoProjectData]
-    public async Task ExistingToDoItemSearchByTitle_Found(Project project, IList<ToDoItem> items)
+    public async Task ExistingToDoItemSearchByTitle_Found(
+        Project project,
+        Project project2,
+        IList<ToDoItem> items,
+        IList<ToDoItem> items2)
     {
         foreach (var i in items)
         {
             project.AddItem(i);
         }
-        await InsertAsync(project);
-
+        foreach (var i in items2)
+        {
+            project2.AddItem(i);
+        }
         var itemToFind = items.First();
+        project.MarkComplete(itemToFind.ProjectNumber);
+        await InsertAsync(project, project2);
+
         var query = new SearchTodoItemQuery() { SearchTerm = itemToFind.Title };
 
         var foundItems = await SendAsync(query);
@@ -71,7 +80,7 @@ public class SearchTodoItemQueryTests : IntegrationTestBase
         foundItems.TotalCount.Should().Be(1);
         foundItems.Items.Should().ContainSingle().Which.Should().BeEquivalentTo(new TodoItemViewModel
         {
-            Id = itemToFind.Id,
+            ProjectNumber = 1,
             Description = itemToFind.Description,
             IsDone = itemToFind.IsDone,
             Title = itemToFind.Title,

@@ -1,4 +1,4 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Application.IntegrationTests.Projects.Queries;
@@ -12,7 +12,7 @@ using Nikiforovall.ES.Template.Tests.Common;
 public class GetProjectByIdQueryTests : IntegrationTestBase
 {
     [Theory, AutoData]
-    public void AliasIsNotSpecified(GetProjectByIdQuery query) =>
+    public void ProjectDoesNotExist_ExceptionThrow(GetProjectByIdQuery query) =>
         FluentActions.Invoking(() =>
             SendAsync(query)).Should().ThrowAsync<NotFoundException>();
 
@@ -32,6 +32,8 @@ public class GetProjectByIdQueryTests : IntegrationTestBase
         projectViewModel.Should().NotBeNull();
         projectViewModel.Name.Should().Be(project.Name);
         projectViewModel.DisplayName.Should().Contain(project.Colour);
-        items.Should().BeEquivalentTo(projectViewModel.Items);
+        items.Should().BeEquivalentTo(
+            projectViewModel.Items,
+            cfg => cfg.Excluding(x => x.ProjectNumber));
     }
 }

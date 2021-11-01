@@ -2,10 +2,12 @@
 REPOSITORIES=(
   na-ca
   na-es
+  na-bu
 )
 declare -A FOLDERS=(
-  ["ca-ca"]="src/templates/ca-template"
+  ["na-ca"]="src/templates/ca-template"
   ["na-es"]="src/templates/es-template"
+  ["na-bu"]="src/templates/bu-template"
 )
 
 for REPOSITORY in ${REPOSITORIES[*]}

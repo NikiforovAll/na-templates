@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  naca.api:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall.api:${TAG:-latest}
+    build:
+      context: na-ca
+      dockerfile: src/Api/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5000:80"
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  naca.worker:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall.worker:${TAG:-latest}
+    build:
+      context: na-ca
+      dockerfile: src/Worker/Dockerfile
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  naes.api:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall.api:${TAG:-latest}
+    build:
+      context: na-es
+      dockerfile: src/Api/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5000:80"
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  naes.worker:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall.worker:${TAG:-latest}
+    build:
+      context: na-es
+      dockerfile: src/Worker/Dockerfile
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+  
+  postgres:
+    image: postgres:14.0

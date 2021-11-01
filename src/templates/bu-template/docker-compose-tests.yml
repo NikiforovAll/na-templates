@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  nikiforovall-unit-tests:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall-test-unit:${TAG:-latest}
+    build:
+      context: nikiforovall
+      dockerfile: src/Api/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./artifacts/}:/tests
+
+  nikiforovall-integration-tests:
+    image: ${REGISTRY:-nikiforovall}/nikiforovall-test-integration:${TAG:-latest}
+    build:
+      context: nikiforovall
+      dockerfile: src/Api/Dockerfile
+      target: integrationtest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./artifacts/}:/tests
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14.0
+    hostname: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"

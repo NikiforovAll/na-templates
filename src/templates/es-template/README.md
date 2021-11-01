@@ -20,6 +20,9 @@
 
 ## Overview
 
+![cleanarch](assets/DomainDrivenHexagon.png)
+Reference to <https://github.com/Sairyss/domain-driven-hexagon>
+
 ### Domain
 
 This will contain all entities, enums, exceptions, interfaces, types and logic specific to the domain layer.
@@ -51,7 +54,9 @@ Inspired by:
 
 ## TODO
 
-TODO: [] implement es
+TODO: [X] implement es
+TODO: [X] Add Console seeding implementation
+TODO: [X] Add Marten.Console
 TODO: [] add github ci
 TODO: [] finish readme
 TODO: [] dockerize

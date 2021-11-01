@@ -1,41 +1,58 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Domain.ProjectAggregate;
 
-using Nikiforovall.ES.Template.Domain.ProjectAggregate.Events;
-using Nikiforovall.ES.Template.Domain.SharedKernel;
+using Nikiforovall.ES.Template.Domain.SharedKernel.Aggregates;
 using Nikiforovall.ES.Template.Domain.ValueObjects;
+using static Nikiforovall.ES.Template.Domain.ProjectAggregate.Events.Events.V1;
 
-public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
+public class Project : Aggregate
 {
-    public Guid Id { get; private set; }
-
     public string Name { get; private set; }
 
     public Colour Colour { get; private set; }
 
-    private readonly List<ToDoItem> items;
 
-    public IEnumerable<ToDoItem> Items => this.items?.AsReadOnly() ?? Enumerable.Empty<ToDoItem>();
+    public IList<ToDoItem> Items { get; private set; }
 
-    public ProjectStatus Status => this.items.All(i => i.IsDone) ? ProjectStatus.Complete : ProjectStatus.InProgress;
+    //private readonly List<ToDoItem> items;
+    // TODO: encapsulate collection properly, currently, it causes bug during deserialization (Marten)
+    //public IEnumerable<ToDoItem> Items => this.items?.AsReadOnly() ?? Enumerable.Empty<ToDoItem>();
 
-    public List<DomainEvent> DomainEvents { get; private set; } = new();
+    public ProjectStatus Status => this.Items.All(i => i.IsDone) ? ProjectStatus.Complete : ProjectStatus.InProgress;
+
+    public DateTime CreatedAt { get; private set; }
 
     /// <summary>
-    /// EF required
+    /// Marten required
     /// </summary>
-    private Project() => this.items = new();
+    private Project() => this.Items = new List<ToDoItem>();
 
-    public Project(string name, Colour colour) : this()
+    public Project(Guid id, string name, Colour colour) : this()
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
         }
-        this.Name = name;
-        this.Colour = colour;
+        var @event = ProjectCreated.Create(
+            id,
+            name,
+            colour.Code,
+            DateTime.UtcNow);
+
+        this.Enqueue(@event);
+        this.Apply(@event);
+    }
+
+    private void Apply(ProjectCreated @event)
+    {
+        this.Version++;
+
+        this.Id = @event.Id;
+        this.Name = @event.Name;
+        this.Colour = (Colour)@event.Colour;
+        this.CreatedAt = @event.CreatedAt;
     }
 
     public void AddItem(ToDoItem newItem)
@@ -45,10 +62,30 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
             throw new ArgumentNullException(nameof(newItem));
         }
 
-        this.items.Add(newItem);
+        var eventId = this.Items is { Count: 0 } ? 0 : this.Items.Max(i => i.ProjectNumber);
+        eventId++;
+        var @event = NewItemAdded.Create(
+            newItem.Id,
+            eventId,
+            newItem.Title,
+            newItem.Description,
+            this.Id);
 
-        var newItemAddedEvent = new NewItemAddedEvent(this, newItem);
-        this.DomainEvents.Add(newItemAddedEvent);
+        this.Enqueue(@event);
+        this.Apply(@event);
+    }
+
+    private void Apply(NewItemAdded @event)
+    {
+        this.Version++;
+
+        var todoItem = new ToDoItem(@event.ItemId, @event.ProjectNumber, this.Id)
+        {
+            Description = @event.Description,
+            Title = @event.Title,
+        };
+
+        this.Items.Add(todoItem);
     }
 
     public void UpdateName(string newName)
@@ -58,6 +95,45 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
             throw new ArgumentException($"'{nameof(newName)}' cannot be null or whitespace.", nameof(newName));
         }
 
-        this.Name = newName;
+        var @event = NameUpdated.Create(newName);
+
+        this.Enqueue(@event);
+        this.Apply(@event);
+    }
+
+    private void Apply(NameUpdated @event)
+    {
+        this.Version++;
+
+        this.Name = @event.Name;
+    }
+
+    public void MarkComplete(int todoItemId)
+    {
+        var todoItem = this.Items.FirstOrDefault(i => i.ProjectNumber == todoItemId);
+
+        if (todoItem is null)
+        {
+            return;
+        }
+
+        var @event = ToDoItemCompleted.Create(this.Id, todoItemId);
+
+        this.Enqueue(@event);
+        this.Apply(@event);
+    }
+
+    private void Apply(ToDoItemCompleted @event)
+    {
+        this.Version++;
+
+        this.Items.FirstOrDefault(i => i.ProjectNumber == @event.ItemId)?.MarkComplete();
+    }
+
+    public void Archieve()
+    {
+        var @event = ProjectArchieved.Create(this.Id, DateTime.UtcNow);
+
+        this.Enqueue(@event);
     }
 }

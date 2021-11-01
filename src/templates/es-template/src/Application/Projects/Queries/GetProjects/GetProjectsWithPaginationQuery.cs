@@ -1,16 +1,15 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Application.Projects.Queries.GetProjects;
 
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Nikiforovall.ES.Template.Application.Interfaces;
 using Nikiforovall.ES.Template.Application.Projects.Models;
 using Nikiforovall.ES.Template.Application.SharedKernel.Mappings;
 using Nikiforovall.ES.Template.Application.SharedKernel.Models;
+using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
+using Nikiforovall.ES.Template.Domain.ProjectAggregate;
 
 public class GetProjectsWithPaginationQuery : IRequest<PaginatedList<ProjectSummaryViewModel>>
 {
@@ -21,20 +20,31 @@ public class GetProjectsWithPaginationQuery : IRequest<PaginatedList<ProjectSumm
 public class GetProjectsWithPaginationQueryHandler
     : IRequestHandler<GetProjectsWithPaginationQuery, PaginatedList<ProjectSummaryViewModel>>
 {
-    private readonly IApplicationDbContext context;
+    private readonly IDocumentStore store;
     private readonly IMapper mapper;
 
-    public GetProjectsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetProjectsWithPaginationQueryHandler(
+        IDocumentStore store, IMapper mapper)
     {
-        this.context = context ?? throw new ArgumentNullException(nameof(context));
+        this.store = store ?? throw new ArgumentNullException(nameof(store));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     public async Task<PaginatedList<ProjectSummaryViewModel>> Handle(
-        GetProjectsWithPaginationQuery request, CancellationToken cancellationToken) =>
-            await this.context.Projects
-                .AsNoTracking()
-                .OrderBy(p => p.Name)
-                .ProjectTo<ProjectSummaryViewModel>(this.mapper.ConfigurationProvider)
-                .PaginatedListAsync(request.PageNumber, request.PageSize);
+        GetProjectsWithPaginationQuery request,
+        CancellationToken cancellationToken)
+    {
+        var query = this.store.Query<Project>();
+
+        var paged = await query
+            .OrderBy(p => p.Name)
+            .PaginatedListAsync(request.PageNumber, request.PageSize);
+
+        var mapped = this.mapper.Map<List<ProjectSummaryViewModel>>(paged.Items);
+        return new PaginatedList<ProjectSummaryViewModel>(
+            mapped,
+            paged.TotalCount,
+            paged.PageIndex,
+            paged.TotalPages);
+    }
 }

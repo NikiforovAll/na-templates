@@ -1,19 +1,15 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Application.ToDoItems.Queries.SearchToDoItem;
 
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Nikiforovall.ES.Template.Application.Interfaces;
 using Nikiforovall.ES.Template.Application.Projects.Models;
 using Nikiforovall.ES.Template.Application.SharedKernel.Mappings;
 using Nikiforovall.ES.Template.Application.SharedKernel.Models;
-using Nikiforovall.ES.Template.Application.SharedKernel.Utils;
+using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
+using Nikiforovall.ES.Template.Domain.ProjectAggregate;
 using Nikiforovall.ES.Template.Domain.ProjectAggregate.Specifications;
 
 public class SearchTodoItemQuery : IRequest<PaginatedList<TodoItemViewModel>>
@@ -27,29 +23,29 @@ public class SearchTodoItemQuery : IRequest<PaginatedList<TodoItemViewModel>>
 public class SearchTodoItemQueryHandler
     : IRequestHandler<SearchTodoItemQuery, PaginatedList<TodoItemViewModel>>
 {
-    private readonly IApplicationDbContext context;
+    private readonly IDocumentStore store;
     private readonly IMapper mapper;
 
-    public SearchTodoItemQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public SearchTodoItemQueryHandler(
+        IDocumentStore store, IMapper mapper)
     {
-        this.context = context;
-        this.mapper = mapper;
+        this.store = store ?? throw new ArgumentNullException(nameof(store));
+        this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     public async Task<PaginatedList<TodoItemViewModel>> Handle(
-        SearchTodoItemQuery request, CancellationToken cancellationToken)
+        SearchTodoItemQuery request,
+        CancellationToken cancellationToken)
     {
         var spec = new ItemsSearchSpecification(request.SearchTerm);
 
-        var query = this.context.ToDoItems
-            .ApplySpecification(spec)
-            .AsNoTracking()
-            .OrderBy(i => i.Id);
+        var query = this.store.Query<ToDoItem>().ApplySpecification(spec);
 
-        var items = await query
-            .ProjectTo<TodoItemViewModel>(this.mapper.ConfigurationProvider)
+        var paged = await query
             .PaginatedListAsync(request.PageNumber, request.PageSize);
 
-        return items;
+        var mapped = this.mapper.Map<List<TodoItemViewModel>>(paged.Items);
+        return new PaginatedList<TodoItemViewModel>(
+            mapped, paged.TotalCount, paged.PageIndex, paged.TotalPages);
     }
 }

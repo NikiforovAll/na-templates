@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Console.Marten": {
+      "commandName": "Project",
+      "commandLineArgs": "marten-assert"
+    }
+  }
+}

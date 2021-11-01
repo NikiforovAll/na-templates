@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  nikiforovall-unit-tests:
+    entrypoint: ["/bin/sh","-c"]
+    command:
+      - |
+        ls
+        dotnet test Domain.UnitTests -p:CoverletOutput=/tests/coverage/Domain.UnitTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Application.UnitTests -p:CoverletOutput=/tests/coverage/Application.UnitTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Worker.UnitTests -p:CoverletOutput=/tests/coverage/Worker.UnitTests/coverage.xml -p:CollectCoverage=true
+
+  nikiforovall-integration-tests:
+    environment:
+      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = nikiforovall.tests; PASSWORD = postgres; USER ID = postgres
+    entrypoint: ["/bin/sh","-c"]
+    command:
+      - |
+        dotnet test Application.IntegrationTests -p:CoverletOutput=/tests/coverage/Application.IntegrationTests/coverage.xml -p:CollectCoverage=true

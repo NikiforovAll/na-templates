@@ -1,6 +1,0 @@
-[*.cs]
-
-# CA1707: Identifiers should not contain underscores
-dotnet_diagnostic.CA1707.severity = none
-dotnet_diagnostic.IDE0065.severity = none
-dotnet_diagnostic.IDE0073.severity = none

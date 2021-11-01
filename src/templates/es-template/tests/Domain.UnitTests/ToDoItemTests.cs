@@ -1,18 +1,16 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Domain.UnitTests;
 
-using AutoFixture.Xunit2;
 using Nikiforovall.ES.Template.Domain.ProjectAggregate;
-using Nikiforovall.ES.Template.Domain.ProjectAggregate.Events;
 
 public class ToDoItemTests
 {
-    [AutoData, Theory]
-    public void ToDoItemConstructed_Sucessfully(string title, string description)
+    [Theory, AutoData]
+    public void ToDoItemConstructed_Sucessfully(Project project, string title, string description)
     {
-        var sut = new ToDoItem()
+        var sut = new ToDoItem(Guid.NewGuid(), 1, project.Id)
         {
             Description = description,
             Title = title,
@@ -23,14 +21,12 @@ public class ToDoItemTests
         sut.IsDone.Should().BeFalse();
     }
 
-    [AutoData, Theory]
+    [Theory, AutoData]
     public void MarkComplete_CompletedAdnEventDispatched(ToDoItem sut)
     {
         sut.MarkComplete();
 
         sut.IsDone.Should().BeTrue();
-        sut.DomainEvents.Should().ContainSingle()
-            .Which.GetType().Name.Should().Be(nameof(ToDoItemCompletedEvent));
         sut.ToString().Should().Contain("Done");
     }
 }

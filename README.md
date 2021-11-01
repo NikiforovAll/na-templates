@@ -14,6 +14,7 @@ dotnet new --install NikiforovAll.CleanArchitecture.Templates
 
 * <https://github.com/NikiforovAll/na-ca>
 * <https://github.com/NikiforovAll/na-es>
+* <https://github.com/NikiforovAll/na-bu>
 
 ## Overview
 

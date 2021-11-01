@@ -1,20 +1,26 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Application.IntegrationTests;
 
-using System.IO;
+using Marten;
+using Marten.Events.Projections;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Nikiforovall.ES.Template.Api;
+using Nikiforovall.ES.Template.Application.SharedKernel.Repositories;
+using Nikiforovall.ES.Template.Domain.ProjectAggregate;
+using Nikiforovall.ES.Template.Domain.SharedKernel.Aggregates;
+using Nikiforovall.ES.Template.Infrastructure;
 using Nikiforovall.ES.Template.Infrastructure.Persistence;
+using Nikiforovall.ES.Template.Infrastructure.Persistence.Projections;
 using Npgsql;
 using Respawn;
+using IDocumentStore = Marten.IDocumentStore;
 
 /// <summary>
 /// Ref: https://github.com/jbogard/ContosoUniversityDotNetCore/blob/master/ContosoUniversity.IntegrationTests/SliceFixture.cs
@@ -40,30 +46,33 @@ public class SliceFixture
 
         startup.ConfigureServices(services);
 
+        // ! REPLACES projections, used for testing purposes
+        services.AddMarten(Configuration,
+            options =>
+            {
+                options.Projections.SelfAggregate<Project>();
+                options.Projections.Add<ToDoItemProjection>(ProjectionLifecycle.Inline);
+                options.Projections.Add<ProjectArchivedProjection>(ProjectionLifecycle.Inline);
+            });
+
         var provider = services.BuildServiceProvider();
+        var martenConfig = Configuration
+            .GetSection("EventStore")
+            .Get<MartenConfiguration>();
         ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
         Checkpoint = new Checkpoint()
         {
-            SchemasToInclude = new[] { "public" },
-            TablesToIgnore = new[] { "__EFMigrationsHistory" },
+            SchemasToInclude = new[] { martenConfig.ReadModelSchema, martenConfig.WriteModelSchema },
+            TablesToIgnore = Array.Empty<string>(),
             DbAdapter = DbAdapter.Postgres,
         };
-
-        EnsureDatabase();
     }
-
-    private static void EnsureDatabase()
-    {
-        using var scope = ScopeFactory.CreateScope();
-
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        context.Database.Migrate();
-    }
-
     public static async Task ResetCheckpointAsync()
     {
-        using (var conn = new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection")))
+        var martenConfig = Configuration
+            .GetSection("EventStore")
+            .Get<MartenConfiguration>();
+        using (var conn = new NpgsqlConnection(martenConfig.ConnectionString))
         {
             await conn.OpenAsync();
 
@@ -75,19 +84,12 @@ public class SliceFixture
     {
         using (var scope = ScopeFactory.CreateScope())
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
             try
             {
-                await dbContext.BeginTransactionAsync().ConfigureAwait(false);
-
                 await action(scope.ServiceProvider).ConfigureAwait(false);
-
-                await dbContext.CommitTransactionAsync().ConfigureAwait(false);
             }
             catch (Exception)
             {
-                dbContext.RollbackTransaction();
                 throw;
             }
         }
@@ -97,106 +99,67 @@ public class SliceFixture
     {
         using (var scope = ScopeFactory.CreateScope())
         {
-            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
-
             try
             {
-                await dbContext.BeginTransactionAsync().ConfigureAwait(false);
-
                 var result = await action(scope.ServiceProvider).ConfigureAwait(false);
-
-                await dbContext.CommitTransactionAsync().ConfigureAwait(false);
 
                 return result;
             }
             catch (Exception)
             {
-                dbContext.RollbackTransaction();
                 throw;
             }
         }
     }
 
-    public static Task ExecuteDbContextAsync(Func<ApplicationDbContext?, Task> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>()));
+    public static Task ExecuteDocumentStoreAsync(Func<IDocumentStore, Task> action)
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IDocumentStore>()));
 
-    public static Task ExecuteDbContextAsync(Func<ApplicationDbContext?, IMediator, Task> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>(), sp.GetService<IMediator>()));
+    public static Task ExecuteDocumentStoreAsync(Func<IDocumentStore, IMediator, Task> action)
+        => ExecuteScopeAsync(sp => action(
+            sp.GetRequiredService<IDocumentStore>(), sp.GetRequiredService<IMediator>()));
 
-    public static Task<T> ExecuteDbContextAsync<T>(Func<ApplicationDbContext?, Task<T>> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>()));
+    public static Task<T> ExecuteDocumentStoreAsync<T>(Func<IDocumentStore, Task<T>> action)
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IDocumentStore>()));
 
-    public static Task<T> ExecuteDbContextAsync<T>(Func<ApplicationDbContext?, IMediator, Task<T>> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>(), sp.GetService<IMediator>()));
+    public static Task<T> ExecuteDocumentStoreAsync<T>(Func<IDocumentStore, IMediator, Task<T>> action)
+        => ExecuteScopeAsync(sp => action(
+            sp.GetRequiredService<IDocumentStore>(), sp.GetRequiredService<IMediator>()));
 
-    public static Task InsertAsync<T>(params T[] entities) where T : class =>
-        ExecuteDbContextAsync(db =>
+    public static Task ExecuteDatabaseAsync<T>(Func<IRepository<T>, Task> action) where T : IAggregate
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IRepository<T>>()));
+
+    public static Task<T> ExecuteDatabaseAsync<T>(Func<IRepository<T>, Task<T>> action) where T : IAggregate
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IRepository<T>>()));
+
+    public static Task InsertAsync<T>(params T[] entities) where T : IAggregate =>
+        ExecuteDatabaseAsync<T>(async db =>
         {
             foreach (var entity in entities)
             {
-                db.Set<T>().Add(entity);
+                await db.AddAsync(entity, CancellationToken.None);
             }
-            return db.SaveChangesAsync();
         });
 
-    public static Task InsertAsync<TEntity>(TEntity entity) where TEntity : class =>
-        ExecuteDbContextAsync(db =>
+    public static Task InsertDocumentsAsync<T>(params T[] entities) where T : class =>
+        ExecuteDocumentStoreAsync(async db =>
         {
-            db.Set<TEntity>().Add(entity);
-
-            return db.SaveChangesAsync();
+            using var session = db.LightweightSession();
+            foreach (var entity in entities)
+            {
+                session.Store(entity);
+            }
+            await session.SaveChangesAsync();
         });
 
-    public static Task InsertAsync<TEntity, TEntity2>(TEntity entity, TEntity2 entity2)
-        where TEntity : class
-        where TEntity2 : class =>
-            ExecuteDbContextAsync(db =>
-            {
-                db.Set<TEntity>().Add(entity);
-                db.Set<TEntity2>().Add(entity2);
+    public static Task<T?> FindAsync<T>(Guid id)
+        where T : class, IAggregate => ExecuteDatabaseAsync<T>(db => db.FindAsync(id, CancellationToken.None));
 
-                return db.SaveChangesAsync();
-            });
-
-    public static Task InsertAsync<TEntity, TEntity2, TEntity3>(TEntity entity, TEntity2 entity2, TEntity3 entity3)
-        where TEntity : class
-        where TEntity2 : class
-        where TEntity3 : class =>
-        ExecuteDbContextAsync(db =>
-        {
-            db.Set<TEntity>().Add(entity);
-            db.Set<TEntity2>().Add(entity2);
-            db.Set<TEntity3>().Add(entity3);
-
-            return db.SaveChangesAsync();
-        });
-
-    public static Task InsertAsync<TEntity, TEntity2, TEntity3, TEntity4>(TEntity entity, TEntity2 entity2, TEntity3 entity3, TEntity4 entity4)
-        where TEntity : class
-        where TEntity2 : class
-        where TEntity3 : class
-        where TEntity4 : class =>
-            ExecuteDbContextAsync(db =>
-            {
-                db.Set<TEntity>().Add(entity);
-                db.Set<TEntity2>().Add(entity2);
-                db.Set<TEntity3>().Add(entity3);
-                db.Set<TEntity4>().Add(entity4);
-
-                return db.SaveChangesAsync();
-            });
-
-    public static Task<T> FindAsync<T>(params object[] keyValues)
-        where T : class => ExecuteDbContextAsync(db => db.Set<T>().FindAsync(keyValues).AsTask());
-
-    // TBD: tests are not isolated, so it is really bad idea to check for count in any given point of time.
-    //public static Task<int> CountAsync<TEntity>() where TEntity : class =>
-    //    ExecuteDbContextAsync(db => db.Set<TEntity>().CountAsync());
 
     public static Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request) =>
         ExecuteScopeAsync(sp =>
         {
-            var mediator = sp.GetService<IMediator>();
+            var mediator = sp.GetRequiredService<IMediator>();
 
             return mediator.Send(request);
         });
@@ -204,7 +167,7 @@ public class SliceFixture
     public static Task SendAsync(IRequest request) =>
         ExecuteScopeAsync(sp =>
         {
-            var mediator = sp.GetService<IMediator>();
+            var mediator = sp.GetRequiredService<IMediator>();
 
             return mediator.Send(request);
         });
@@ -213,14 +176,14 @@ public class SliceFixture
     {
         public string EnvironmentName { get; set; } = Environments.Production;
 
-        public string ApplicationName { get; set; }
+        public string ApplicationName { get; set; } = default!;
 
-        public string WebRootPath { get; set; }
+        public string WebRootPath { get; set; } = default!;
 
-        public IFileProvider WebRootFileProvider { get; set; }
+        public IFileProvider WebRootFileProvider { get; set; } = default!;
 
-        public string ContentRootPath { get; set; }
+        public string ContentRootPath { get; set; } = default!;
 
-        public IFileProvider ContentRootFileProvider { get; set; }
+        public IFileProvider ContentRootFileProvider { get; set; } = default!;
     }
 }

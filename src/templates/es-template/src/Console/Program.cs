@@ -1,4 +1,4 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 using System.CommandLine;
@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nikiforovall.ES.Template.Application;
 using Nikiforovall.ES.Template.Console;
-using Nikiforovall.ES.Template.Console.Commands.Migrate;
 using Nikiforovall.ES.Template.Console.Commands.SeedCommands;
 using Nikiforovall.ES.Template.Infrastructure;
 using Serilog;
@@ -29,7 +28,6 @@ var runner = BuildCommandLine()
             services.AddInfrastructure(configuration);
             services.AddCliContainer();
         })
-        .UseCommandHandler<MigrateCommand, MigrateCommand.Run>()
         .UseCommandHandler<SeedProjectCommand, SeedProjectCommand.Run>();
 
     }).UseDefaults().Build();
@@ -40,7 +38,6 @@ static CommandLineBuilder BuildCommandLine()
 {
     var root = new RootCommand();
 
-    root.AddCommand(new MigrateCommand());
     root.AddCommand(new SeedProjectCommand());
 
     root.AddGlobalOption(new Option<bool>("--silent", "Disables diagnostics output"));

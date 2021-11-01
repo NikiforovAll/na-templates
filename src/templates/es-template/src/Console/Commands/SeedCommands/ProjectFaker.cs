@@ -1,4 +1,4 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Console.Commands.SeedCommands;
@@ -16,13 +16,9 @@ public class ProjectFaker : AutoFaker<Project>
         var colours = Colour.SupportedColours.ToList();
 
         this.CustomInstantiator(faker =>
-            new Project(this.FakerHub.Company.Random.Word(), faker.PickRandom(colours)));
+            new Project(Guid.NewGuid(), this.FakerHub.Company.Random.Word(), faker.PickRandom(colours)));
 
         this.RuleFor(faker => faker.Colour, faker => faker.PickRandom(colours));
-
-        this.Configure(builder => builder
-            .WithSkip<Project>(p => p.LastModified)
-            .WithSkip<Project>(p => p.LastModifiedBy));
 
         this.FinishWith((fake, project) =>
         {

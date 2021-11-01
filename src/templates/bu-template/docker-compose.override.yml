@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  naca.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+
+  naca.worker:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - RabbitMQConfiguration__Host=rabbitmq
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+
+  naes.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
+
+  naes.worker:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - RabbitMQConfiguration__Host=rabbitmq
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
+
+
+  postgres:
+    volumes:
+      - ./build/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql

@@ -1,4 +1,4 @@
-// Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace Nikiforovall.ES.Template.Console.Commands.SeedCommands;
@@ -14,7 +14,6 @@ public class ToDoItemFaker : AutoFaker<ToDoItem>
         this.RuleFor(faker => faker.Title, faker => faker.Name.JobTitle());
 
         this.Configure(builder => builder
-            .WithSkip<ToDoItem>(t => t.Id)
-            .WithSkip<ToDoItem>(t => t.DomainEvents));
+            .WithSkip<ToDoItem>(t => t.ProjectNumber));
     }
 }

@@ -108,7 +108,7 @@ dotnet_diagnostic.IDE0016.severity = suggestion
 # dotnet_diagnostic.SA1636.severity = warning
 
 [*.{cs,csx,cake,vb,vbx}]
-file_header_template = Copyright (c) Oleksii Nikiforov, 2018. All rights reserved.\nLicensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
+file_header_template = Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.\nLicensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 csharp_style_namespace_declarations=file_scoped
 
 # IDE0073: The file header is missing or not located at the top of the file
