@@ -9,16 +9,28 @@
   "name": "Build Project [na-bu]",
   "description": "Creates a build project to manage multiple projects via docker-compose.",
   "shortName": "na-bu",
-  "sourceName": "Nikiforovall.BU.Template",
+  "sourceName": "NikiforovAll.BU.Template",
   "preferNameDirectory": true,
   "defaultName": "build-project",
   "tags": {
     "language": "bash",
     "type": "project"
   },
-  "symbols": {},
+  "symbols":{
+    "includeSolutionFile": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": "false"
+    }
+  },
   "guids": [
   ],
-  "sources": [],
+  "sources":[{
+    "modifiers": [{
+      "condition": "(!includeSolutionFile)",
+      "exclude": [ "NikiforovAll.BuildProject.Template.sln"]
+      }
+    ]
+  }],
   "postActions": []
 }

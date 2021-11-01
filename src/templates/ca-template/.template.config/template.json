@@ -10,7 +10,7 @@
   "name": "Clean Architecture [na-ca]",
   "description": "Creates a solution that follows Clean Architecture and DDD principles.",
   "shortName": "na-ca",
-  "sourceName": "Nikiforovall.CA.Template",
+  "sourceName": "NikiforovAll.CA.Template",
   "preferNameDirectory": true,
   "defaultName": "clean-architecture",
   "tags": {

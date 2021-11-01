@@ -12,6 +12,19 @@ A collection of templates for the rapid development of enterprise applications. 
 dotnet new --install NikiforovAll.CleanArchitecture.Templates
 ```
 
+Once installed, you can see a list of templates by running:
+
+```bash
+$ dotnet new -l na-
+# These templates matched your input: 'na-'
+
+# Template Name               Short Name  Language  Tags
+# --------------------------  ----------  --------  --------------------------------------------
+# Build Project [na-bu]       na-bu       bash      build-project/Template
+# Clean Architecture [na-ca]  na-ca       [C#]      CleanArchitecture/DDD/Template
+# Clean Architecture [na-ca]  na-es       [C#]      EventSourcing/CleanArchitecture/DDD/Template
+```
+
 * <https://github.com/NikiforovAll/na-ca>
 * <https://github.com/NikiforovAll/na-es>
 * <https://github.com/NikiforovAll/na-bu>
@@ -23,6 +36,7 @@ The engine itself `dotnet new` provides information about possible configuration
 ```bash
 dotnet new na-ca -h
 dotnet new na-es -h
+dotnet new na-bu -h
 ```
 
 ### Usage

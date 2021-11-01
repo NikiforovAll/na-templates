@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 public class BuildProjectTemplateTests
 {
     private const string TemplateName = "na-bu";
-    private const string SolutionFileName = "docker-compose.yml";
+    private const string SolutionFileName = "NikiforovAll.BuildProject.Template.sln";
     private static readonly string[] DefaultArguments = Array.Empty<string>();
 
     public BuildProjectTemplateTests(ITestOutputHelper testOutputHelper)
@@ -33,6 +33,8 @@ public class BuildProjectTemplateTests
             .ConfigureAwait(false);
 
         Assert.True(File.Exists(Path.Combine(project.DirectoryPath, "README.md")));
+        Assert.True(File.Exists(Path.Combine(project.DirectoryPath, "docker-compose.yml")));
+        Assert.False(File.Exists(Path.Combine(project.DirectoryPath, SolutionFileName)));
     }
 
     private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<EventSourcingTemplateTests>(SolutionFileName);
