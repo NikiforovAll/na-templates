@@ -8,7 +8,7 @@
     "Template"
   ],
   "identity": "NikiforovAll.EventSourcing.Template",
-  "name": "Clean Architecture [na-ca]",
+  "name": "Event Sourcing Template",
   "description": "Creates a solution that follows EventSourcing, Clean Architecture, and DDD principles.",
   "shortName": "na-es",
   "sourceName": "NikiforovAll.ES.Template",

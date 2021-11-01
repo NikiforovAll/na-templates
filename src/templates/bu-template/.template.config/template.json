@@ -6,7 +6,7 @@
     "Template"
   ],
   "identity": "NikiforovAll.BuildProject.Template",
-  "name": "Build Project [na-bu]",
+  "name": "Build Project Template",
   "description": "Creates a build project to manage multiple projects via docker-compose.",
   "shortName": "na-bu",
   "sourceName": "NikiforovAll.BU.Template",

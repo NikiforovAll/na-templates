@@ -7,7 +7,7 @@
     "Template"
   ],
   "identity": "NikiforovAll.CleanArchitecture.Template",
-  "name": "Clean Architecture [na-ca]",
+  "name": "Clean Architecture Template",
   "description": "Creates a solution that follows Clean Architecture and DDD principles.",
   "shortName": "na-ca",
   "sourceName": "NikiforovAll.CA.Template",

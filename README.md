@@ -29,11 +29,11 @@ Once installed, you can see a list of templates by running:
 $ dotnet new -l na-
 # These templates matched your input: 'na-'
 
-# Template Name               Short Name  Language  Tags
-# --------------------------  ----------  --------  --------------------------------------------
-# Build Project [na-bu]       na-bu       bash      build-project/Template
-# Clean Architecture [na-ca]  na-ca       [C#]      CleanArchitecture/DDD/Template
-# Clean Architecture [na-ca]  na-es       [C#]      EventSourcing/CleanArchitecture/DDD/Template
+# Template Name                Short Name  Language  Tags
+# ---------------------------  ----------  --------  --------------------------------------------
+# Build Project Template       na-bu       bash      build-project/Template
+# Clean Architecture Template  na-ca       [C#]      CleanArchitecture/DDD/Template
+# Event Sourcing Template      na-es       [C#]      EventSourcing/CleanArchitecture/DDD/Template
 ```
 
 * <https://github.com/NikiforovAll/na-ca>
