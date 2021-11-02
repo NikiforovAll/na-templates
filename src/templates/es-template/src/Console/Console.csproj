@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>NikiforovAll.ES.Template.Console</RootNamespace>
+    <AssemblyName>NikiforovAll.ES.Template.Console</AssemblyName>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 

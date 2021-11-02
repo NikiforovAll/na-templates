@@ -33,6 +33,6 @@ public class CreateProjectCommandTests
         entity.Name.Should().Be(command.Name);
         entity.Status.Should().Be(ProjectStatus.Complete);
         entity.Items.Should().BeEmpty();
-        entity.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
+        entity.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(10));
     }
 }

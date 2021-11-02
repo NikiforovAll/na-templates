@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>NikiforovAll.CA.Template.Domain.SharedKernel</RootNamespace>
+    <AssemblyName>NikiforovAll.CA.Template.Domain.SharedKernel</AssemblyName>
   </PropertyGroup>
 
 </Project>

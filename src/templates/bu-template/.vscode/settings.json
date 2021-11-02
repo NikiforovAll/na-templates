@@ -1,0 +1,11 @@
+{
+    "rest-client.environmentVariables": {
+        "$shared": {},
+        "mentorhub-local": {
+            "NACA_URL": "http://localhost:5000/api",
+            "NAES_URL": "http://localhost:5001/api",
+        },
+        "docker": {
+        }
+    }
+}

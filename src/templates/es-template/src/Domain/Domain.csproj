@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>NikiforovAll.ES.Template.Domain</RootNamespace>
+    <AssemblyName>NikiforovAll.ES.Template.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   naca.api:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall.api:${TAG:-latest}
+    image: ${REGISTRY:-nikiforovall}/naca-api:${TAG:-latest}
     build:
       context: na-ca
       dockerfile: src/Api/Dockerfile
@@ -15,7 +15,7 @@ services:
       - postgres
 
   naca.worker:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall.worker:${TAG:-latest}
+    image: ${REGISTRY:-nikiforovall}/naca-worker:${TAG:-latest}
     build:
       context: na-ca
       dockerfile: src/Worker/Dockerfile
@@ -24,20 +24,20 @@ services:
       - postgres
 
   naes.api:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall.api:${TAG:-latest}
+    image: ${REGISTRY:-nikiforovall}/naes-api:${TAG:-latest}
     build:
       context: na-es
       dockerfile: src/Api/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:80
     ports:
-      - "5000:80"
+      - "5001:80"
     depends_on:
       - rabbitmq
       - postgres
 
   naes.worker:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall.worker:${TAG:-latest}
+    image: ${REGISTRY:-nikiforovall}/naes-worker:${TAG:-latest}
     build:
       context: na-es
       dockerfile: src/Worker/Dockerfile

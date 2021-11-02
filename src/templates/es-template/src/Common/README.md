@@ -1,1 +1,0 @@
-# NikiforovAll.ES.Template.Common

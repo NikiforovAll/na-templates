@@ -1,19 +1,34 @@
 version: "3.9"
 
 services:
-  nikiforovall-unit-tests:
+  naca-unit-tests:
     entrypoint: ["/bin/sh","-c"]
     command:
       - |
         ls
-        dotnet test Domain.UnitTests -p:CoverletOutput=/tests/coverage/Domain.UnitTests/coverage.xml -p:CollectCoverage=true
-        dotnet test Application.UnitTests -p:CoverletOutput=/tests/coverage/Application.UnitTests/coverage.xml -p:CollectCoverage=true
-        dotnet test Worker.UnitTests -p:CoverletOutput=/tests/coverage/Worker.UnitTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Domain.UnitTests -p:CoverletOutput=/tests/coverage/na-ca/Domain.UnitTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Application.UnitTests -p:CoverletOutput=/tests/coverage/na-ca/Application.UnitTests/coverage.xml -p:CollectCoverage=true
 
-  nikiforovall-integration-tests:
+  naca-integration-tests:
     environment:
-      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = nikiforovall.tests; PASSWORD = postgres; USER ID = postgres
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=postgres;Database=ca-template-db;Pooling=true;
     entrypoint: ["/bin/sh","-c"]
     command:
       - |
-        dotnet test Application.IntegrationTests -p:CoverletOutput=/tests/coverage/Application.IntegrationTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Application.IntegrationTests -p:CoverletOutput=/tests/coverage/na-ca/Application.IntegrationTests/coverage.xml -p:CollectCoverage=true
+
+  naes-unit-tests:
+    entrypoint: ["/bin/sh","-c"]
+    command:
+      - |
+        ls
+        dotnet test Domain.UnitTests -p:CoverletOutput=/tests/coverage/na-es/Domain.UnitTests/coverage.xml -p:CollectCoverage=true
+        dotnet test Application.UnitTests -p:CoverletOutput=/tests/coverage/na-es/Application.UnitTests/coverage.xml -p:CollectCoverage=true
+
+  naes-integration-tests:
+    environment:
+      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db.tests; PASSWORD = postgres; USER ID = postgres
+    entrypoint: ["/bin/sh","-c"]
+    command:
+      - |
+        dotnet test Application.IntegrationTests -p:CoverletOutput=/tests/coverage/na-es/Application.IntegrationTests/coverage.xml -p:CollectCoverage=true

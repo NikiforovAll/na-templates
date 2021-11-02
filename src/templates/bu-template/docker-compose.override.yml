@@ -5,6 +5,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   naca.worker:
     environment:
@@ -13,11 +15,15 @@ services:
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
       - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   naes.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   naes.worker:
     environment:
@@ -26,7 +32,8 @@ services:
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
       - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
-
+      - Serilog__WriteTo__1__Name=Seq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   postgres:
     volumes:

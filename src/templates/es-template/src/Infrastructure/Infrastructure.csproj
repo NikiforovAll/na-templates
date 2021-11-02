@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>NikiforovAll.ES.Template.Infrastructure</RootNamespace>
+    <AssemblyName>NikiforovAll.ES.Template.Infrastructure</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

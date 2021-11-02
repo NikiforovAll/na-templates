@@ -4,7 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Epam.Availia.Transactions.Console.Marten</RootNamespace>
+    <RootNamespace>NikiforovAll.ES.Template.Console.Marten</RootNamespace>
+    <AssemblyName>NikiforovAll.ES.Template.Console.Marten</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,19 +1,39 @@
 version: "3.9"
 
 services:
-  nikiforovall-unit-tests:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall-test-unit:${TAG:-latest}
+  naca-unit-tests:
+    image: ${REGISTRY:-nikiforovall}/naca-test-unit:${TAG:-latest}
     build:
-      context: nikiforovall
+      context: na-ca
       dockerfile: src/Api/Dockerfile
       target: unittest
     volumes:
       - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./artifacts/}:/tests
 
-  nikiforovall-integration-tests:
-    image: ${REGISTRY:-nikiforovall}/nikiforovall-test-integration:${TAG:-latest}
+  naca-integration-tests:
+    image: ${REGISTRY:-nikiforovall}/naca-test-integration:${TAG:-latest}
     build:
-      context: nikiforovall
+      context: na-ca
+      dockerfile: src/Api/Dockerfile
+      target: integrationtest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./artifacts/}:/tests
+    depends_on:
+      - postgres
+
+  naes-unit-tests:
+    image: ${REGISTRY:-nikiforovall}/naes-test-unit:${TAG:-latest}
+    build:
+      context: na-es
+      dockerfile: src/Api/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./artifacts/}:/tests
+
+  naes-integration-tests:
+    image: ${REGISTRY:-nikiforovall}/naes-test-integration:${TAG:-latest}
+    build:
+      context: na-es
       dockerfile: src/Api/Dockerfile
       target: integrationtest
     volumes:
@@ -26,6 +46,5 @@ services:
     hostname: postgres
     environment:
       POSTGRES_PASSWORD: postgres
-
     ports:
       - "5432:5432"
