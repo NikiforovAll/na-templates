@@ -42,12 +42,13 @@ public static class ServiceCollectionExtensions
     {
         var options = configuration
                 .GetSection(RabbitMQConfiguration.Options)
-                .Get<RabbitMQConfiguration>();
+                .Get<RabbitMQConfiguration>() ?? new RabbitMQConfiguration();
 
         services.Configure<RabbitMQConfiguration>(
             configuration.GetSection(RabbitMQConfiguration.Options));
 
-        var connectionString = new Uri(options?.ToConnectionString());
+        var connectionString = new Uri(
+            options.ToConnectionString() ?? string.Empty);
 
         services.AddMassTransit(x =>
         {

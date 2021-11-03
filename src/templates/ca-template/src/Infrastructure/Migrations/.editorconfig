@@ -4,3 +4,5 @@
 dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.IDE0065.severity = none
 dotnet_diagnostic.IDE0073.severity = none
+dotnet_diagnostic.IDE0053.severity = none
+csharp_style_namespace_declarations=block_scoped

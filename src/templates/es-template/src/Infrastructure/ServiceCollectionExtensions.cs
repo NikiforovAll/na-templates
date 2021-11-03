@@ -49,7 +49,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddMarten(
         this IServiceCollection services,
         IConfiguration configuration,
-        Action<StoreOptions> configureOptions = null,
+        Action<StoreOptions>? configureOptions = default,
         string configKey = DefaultConfigKey)
     {
         var martenConfig = GetMartenConfig(configuration, configKey);
@@ -98,12 +98,13 @@ public static class ServiceCollectionExtensions
     {
         var options = configuration
                 .GetSection(RabbitMQConfiguration.Options)
-                .Get<RabbitMQConfiguration>();
+                .Get<RabbitMQConfiguration>() ?? new RabbitMQConfiguration();
 
         services.Configure<RabbitMQConfiguration>(
             configuration.GetSection(RabbitMQConfiguration.Options));
 
-        var connectionString = new Uri(options?.ToConnectionString());
+        var connectionString = new Uri(
+            options.ToConnectionString() ?? string.Empty);
 
         services.AddMassTransit(x =>
         {

@@ -73,8 +73,8 @@ TODO: [X] dockerize
 TODO: [X] cleanup appsettings.json
 TODO: [X] add mass transit integration example for worker (optional)
 TODO: [] add example of application service, e.g: message broker publisher
-TODO: [] clear warnings
-TODO: [] ensure nullability (e.g: dtos)
+TODO: [X] clear warnings
+TODO: [X] ensure nullability (e.g: dtos)
 TODO: [] add diagram for solution structure, add docs about DDD, CQRS, Clean Architecture (typescript CA/DDD project has nice diagram)
 TODO: [] add getting started guide: how to setup project, create and seed database, etc.
-TODO: [] TreatWarningsAsErrors
+TODO: [X] TreatWarningsAsErrors

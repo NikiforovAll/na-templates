@@ -27,7 +27,12 @@ public class Project : Aggregate
     /// <summary>
     /// Marten required
     /// </summary>
-    private Project() => this.Items = new List<ToDoItem>();
+    private Project()
+    {
+        this.Items = new List<ToDoItem>();
+        this.Name = string.Empty;
+        this.Colour = Colour.White;
+    }
 
     public Project(Guid id, string name, Colour colour) : this()
     {

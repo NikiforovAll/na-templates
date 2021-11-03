@@ -129,7 +129,7 @@ public class SliceFixture
     public static Task ExecuteDatabaseAsync<T>(Func<IRepository<T>, Task> action) where T : IAggregate
         => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IRepository<T>>()));
 
-    public static Task<T> ExecuteDatabaseAsync<T>(Func<IRepository<T>, Task<T>> action) where T : IAggregate
+    public static Task<T?> ExecuteDatabaseAsync<T>(Func<IRepository<T>, Task<T?>> action) where T : IAggregate
         => ExecuteScopeAsync(sp => action(sp.GetRequiredService<IRepository<T>>()));
 
     public static Task InsertAsync<T>(params T[] entities) where T : IAggregate =>

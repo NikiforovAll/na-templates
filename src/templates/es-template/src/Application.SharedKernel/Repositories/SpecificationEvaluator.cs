@@ -29,7 +29,7 @@ public class SpecificationEvaluator : ISpecificationEvaluator
     {
         inputQuery = this.GetQuery(inputQuery, (ISpecification<T>)specification);
 
-        return inputQuery.Select(specification.Selector);
+        return inputQuery.Select(specification.Selector!);
     }
 
     /// <inheritdoc/>

@@ -7,7 +7,7 @@ using System.Reflection;
 
 public static class TypeProvider
 {
-    public static Type GetTypeFromAnyReferencingAssembly(string typeName)
+    public static Type? GetTypeFromAnyReferencingAssembly(string typeName)
     {
         var referencedAssemblies = Assembly.GetEntryAssembly()?
             .GetReferencedAssemblies()
@@ -24,7 +24,7 @@ public static class TypeProvider
             .FirstOrDefault();
     }
 
-    public static Type GetFirstMatchingTypeFromCurrentDomainAssembly(string typeName) =>
+    public static Type? GetFirstMatchingTypeFromCurrentDomainAssembly(string typeName) =>
         AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes().Where(x => x.FullName == typeName || x.Name == typeName))
             .FirstOrDefault();

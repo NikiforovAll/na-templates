@@ -62,71 +62,69 @@ public class SliceFixture
 
     public static async Task ResetCheckpointAsync()
     {
-        using (var conn = new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection")))
-        {
-            await conn.OpenAsync();
+        using var conn = new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection"));
+        await conn.OpenAsync();
 
-            await Checkpoint.Reset(conn);
-        }
+        await Checkpoint.Reset(conn);
     }
 
     public static async Task ExecuteScopeAsync(Func<IServiceProvider, Task> action)
     {
-        using (var scope = ScopeFactory.CreateScope())
+        using var scope = ScopeFactory.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        try
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            await dbContext.BeginTransactionAsync().ConfigureAwait(false);
 
-            try
-            {
-                await dbContext.BeginTransactionAsync().ConfigureAwait(false);
+            await action(scope.ServiceProvider).ConfigureAwait(false);
 
-                await action(scope.ServiceProvider).ConfigureAwait(false);
-
-                await dbContext.CommitTransactionAsync().ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                dbContext.RollbackTransaction();
-                throw;
-            }
+            await dbContext.CommitTransactionAsync().ConfigureAwait(false);
+        }
+        catch (Exception)
+        {
+            dbContext.RollbackTransaction();
+            throw;
         }
     }
 
     public static async Task<T> ExecuteScopeAsync<T>(Func<IServiceProvider, Task<T>> action)
     {
-        using (var scope = ScopeFactory.CreateScope())
+        using var scope = ScopeFactory.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        try
         {
-            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+            await dbContext.BeginTransactionAsync().ConfigureAwait(false);
 
-            try
-            {
-                await dbContext.BeginTransactionAsync().ConfigureAwait(false);
+            var result = await action(scope.ServiceProvider).ConfigureAwait(false);
 
-                var result = await action(scope.ServiceProvider).ConfigureAwait(false);
+            await dbContext.CommitTransactionAsync().ConfigureAwait(false);
 
-                await dbContext.CommitTransactionAsync().ConfigureAwait(false);
-
-                return result;
-            }
-            catch (Exception)
-            {
-                dbContext.RollbackTransaction();
-                throw;
-            }
+            return result;
+        }
+        catch (Exception)
+        {
+            dbContext.RollbackTransaction();
+            throw;
         }
     }
 
     public static Task ExecuteDbContextAsync(Func<ApplicationDbContext?, Task> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>()));
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<ApplicationDbContext>()));
 
     public static Task ExecuteDbContextAsync(Func<ApplicationDbContext?, IMediator, Task> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>(), sp.GetService<IMediator>()));
+        => ExecuteScopeAsync(sp => action(
+            sp.GetRequiredService<ApplicationDbContext>(),
+            sp.GetRequiredService<IMediator>()));
 
-    public static Task<T> ExecuteDbContextAsync<T>(Func<ApplicationDbContext?, Task<T>> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>()));
+    public static Task<T> ExecuteDbContextAsync<T>(Func<ApplicationDbContext, Task<T>> action)
+        => ExecuteScopeAsync(sp => action(sp.GetRequiredService<ApplicationDbContext>()));
 
     public static Task<T> ExecuteDbContextAsync<T>(Func<ApplicationDbContext?, IMediator, Task<T>> action)
-        => ExecuteScopeAsync(sp => action(sp.GetService<ApplicationDbContext>(), sp.GetService<IMediator>()));
+        => ExecuteScopeAsync(sp => action(
+            sp.GetRequiredService<ApplicationDbContext>(),
+            sp.GetRequiredService<IMediator>()));
 
     public static Task InsertAsync<T>(params T[] entities) where T : class =>
         ExecuteDbContextAsync(db =>
@@ -185,17 +183,13 @@ public class SliceFixture
                 return db.SaveChangesAsync();
             });
 
-    public static Task<T> FindAsync<T>(params object[] keyValues)
+    public static Task<T?> FindAsync<T>(params object[] keyValues)
         where T : class => ExecuteDbContextAsync(db => db.Set<T>().FindAsync(keyValues).AsTask());
-
-    // TBD: tests are not isolated, so it is really bad idea to check for count in any given point of time.
-    //public static Task<int> CountAsync<TEntity>() where TEntity : class =>
-    //    ExecuteDbContextAsync(db => db.Set<TEntity>().CountAsync());
 
     public static Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request) =>
         ExecuteScopeAsync(sp =>
         {
-            var mediator = sp.GetService<IMediator>();
+            var mediator = sp.GetRequiredService<IMediator>();
 
             return mediator.Send(request);
         });
@@ -203,7 +197,7 @@ public class SliceFixture
     public static Task SendAsync(IRequest request) =>
         ExecuteScopeAsync(sp =>
         {
-            var mediator = sp.GetService<IMediator>();
+            var mediator = sp.GetRequiredService<IMediator>();
 
             return mediator.Send(request);
         });
@@ -212,14 +206,14 @@ public class SliceFixture
     {
         public string EnvironmentName { get; set; } = Environments.Production;
 
-        public string ApplicationName { get; set; }
+        public string ApplicationName { get; set; } = default!;
 
-        public string WebRootPath { get; set; }
+        public string WebRootPath { get; set; } = default!;
 
-        public IFileProvider WebRootFileProvider { get; set; }
+        public IFileProvider WebRootFileProvider { get; set; } = default!;
 
-        public string ContentRootPath { get; set; }
+        public string ContentRootPath { get; set; } = default!;
 
-        public IFileProvider ContentRootFileProvider { get; set; }
+        public IFileProvider ContentRootFileProvider { get; set; } = default!;
     }
 }

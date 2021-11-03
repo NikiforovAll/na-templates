@@ -8,30 +8,34 @@ using System.CommandLine.Invocation;
 using Microsoft.Extensions.Logging;
 using NikiforovAll.CA.Template.Infrastructure.Persistence;
 
-public class MigrateCommand : Command
+public partial class MigrateCommand : Command
 {
     public MigrateCommand()
-        : base(name: "migrate", "Migrates the project database. WARNING: creates database if the specified database was not found.")
+        : base(
+            name: "migrate",
+            description: "Migrates the project database. WARNING: creates database if the specified database was not found.")
     {
     }
 
-    public class Run : ICommandHandler
+    public partial class Run : ICommandHandler
     {
         private readonly ApplicationDbContext context;
-        private readonly ILogger<Run> logger;
+        private readonly ILogger<MigrateCommand> logger;
 
-        public Run(ApplicationDbContext context, ILogger<Run> logger)
+        [LoggerMessage(0, LogLevel.Information, "Done!")]
+        static partial void LogDone(ILogger logger);
+
+        public Run(ApplicationDbContext context, ILogger<MigrateCommand> logger)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
         }
-        public IConsole Console { get; set; }
 
         public async Task<int> InvokeAsync(InvocationContext context)
         {
             await this.context.Database.EnsureCreatedAsync();
 
-            this.logger.LogInformation("Done!");
+            LogDone(this.logger);
 
             return 0;
         }

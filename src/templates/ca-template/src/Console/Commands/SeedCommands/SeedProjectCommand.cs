@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using NikiforovAll.CA.Template.Application.Interfaces;
 using Spectre.Console;
 
-public class SeedProjectCommand : Command
+public partial class SeedProjectCommand : Command
 {
     public SeedProjectCommand()
         : base(name: "seed-projects", "Seeds projects into database.")
@@ -21,15 +21,18 @@ public class SeedProjectCommand : Command
             description: "The number of projects."));
     }
 
-    public class Run : ICommandHandler
+    public partial class Run : ICommandHandler
     {
         private readonly IApplicationDbContext context;
-        private readonly ILogger<Run> logger;
+        private readonly ILogger<SeedProjectCommand> logger;
 
-        public Run(IApplicationDbContext context, ILogger<Run> logger)
+        [LoggerMessage(1, LogLevel.Information, "Done!")]
+        static partial void LogDone(ILogger logger);
+
+        public Run(IApplicationDbContext context, ILogger<SeedProjectCommand> logger)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger;
         }
 
         public bool DryRun { get; set; }
@@ -52,7 +55,7 @@ public class SeedProjectCommand : Command
                     });
             }
 
-            this.logger.LogInformation("Done!");
+            LogDone(this.logger);
 
             return 0;
         }

@@ -9,7 +9,7 @@ public static class NoSynchronizationContextScope
     {
         var context = SynchronizationContext.Current;
         SynchronizationContext.SetSynchronizationContext(null);
-        return new Disposable(context);
+        return new Disposable(context!);
     }
 
     public struct Disposable : IDisposable

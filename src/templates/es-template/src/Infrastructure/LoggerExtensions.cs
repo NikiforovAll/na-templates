@@ -14,5 +14,5 @@ internal static class LoggerExtensions
             eventId: 1001,
             formatString: "Aggregate was not updated due to lack of uncommited events in the queue.");
 
-    public static void LogAggregateWithoutEvents(this ILogger logger) => SavingAggregateWithoutEvents(logger, null);
+    public static void LogAggregateWithoutEvents(this ILogger logger) => SavingAggregateWithoutEvents(logger, default!);
 }

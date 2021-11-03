@@ -26,7 +26,12 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
     /// <summary>
     /// EF required
     /// </summary>
-    private Project() => this.items = new();
+    private Project()
+    {
+        this.items = new();
+        this.Name = string.Empty;
+        this.Colour = Colour.White;
+    }
 
     public Project(string name, Colour colour) : this()
     {

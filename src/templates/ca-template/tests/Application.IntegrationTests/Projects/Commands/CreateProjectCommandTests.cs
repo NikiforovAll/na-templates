@@ -29,7 +29,7 @@ public class CreateProjectCommandTests
         command.ColourCode = Colour.Red;
         var project = await SendAsync(command);
 
-        var entity = await FindAsync<Project>(project.Id);
+        var entity = await FindAsync<Project>(project.Id) ?? default!;
 
         entity.Should().NotBeNull();
         entity.Name.Should().Be(command.Name);

@@ -29,11 +29,11 @@ public class StreamNameMapper
         });
 
 #pragma warning disable IDE0060 // Remove unused parameter
-    public static string ToStreamId<TStream>(object aggregateId, object tenantId = null) =>
+    public static string ToStreamId<TStream>(object aggregateId, object? tenantId = null) =>
 #pragma warning restore IDE0060 // Remove unused parameter
         ToStreamId(typeof(TStream), aggregateId);
 
-    public static string ToStreamId(Type streamType, object aggregateId, object tenantId = null)
+    public static string ToStreamId(Type streamType, object aggregateId, object? tenantId = null)
     {
         var tenantPrefix = tenantId != null ? $"{tenantId}_" : "";
 
