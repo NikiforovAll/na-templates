@@ -4,3 +4,13 @@ GET {{NAES_URL}}/projects/
 ###
 
 GET {{NAES_URL}}/todos/search?searchTerm=Awesome
+
+###
+POST {{NAES_URL}}/projects
+Content-Type: application/json
+
+
+{
+    "name": "My Project",
+    "colourCode": "#FF5733"
+}

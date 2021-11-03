@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="MassTransit.AspNetCore" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.AspNetCore" />

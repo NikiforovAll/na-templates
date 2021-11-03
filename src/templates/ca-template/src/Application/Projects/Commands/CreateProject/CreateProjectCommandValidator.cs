@@ -11,6 +11,6 @@ public class CreateProjectCommandValidator : AbstractValidator<CreateProjectComm
     public CreateProjectCommandValidator()
     {
         this.RuleFor(x => x.Name).ValidProjectName();
-        this.RuleFor(x => x.Colour).NotNull();
+        this.RuleFor(x => x.ColourCode).NotEmpty();
     }
 }

@@ -7,6 +7,7 @@ using NikiforovAll.CA.Template.Application.Projects.Commands.CreateProject;
 using NikiforovAll.CA.Template.Application.Projects.Commands.DeleteProject;
 using NikiforovAll.CA.Template.Application.SharedKernel.Exceptions;
 using NikiforovAll.CA.Template.Domain.ProjectAggregate;
+using NikiforovAll.CA.Template.Domain.ValueObjects;
 using NikiforovAll.CA.Template.Tests.Common;
 
 [Trait("Category", "Integration")]
@@ -24,6 +25,7 @@ public class DeleteProjectCommandTests : IntegrationTestBase
     [Theory, AutoData]
     public async Task ProjectExists_Deleted(CreateProjectCommand command)
     {
+        command.ColourCode = Colour.Red;
         var project = await SendAsync(command);
 
         await SendAsync(new DeleteProjectCommand { Id = project.Id });

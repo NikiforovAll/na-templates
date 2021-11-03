@@ -6,13 +6,20 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=host.docker.internal;Database=ca-template-db;Pooling=true;
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=host.docker.internal
     ports:
       - "5001:443"
       - "5000:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
   worker:
     environment:
       - DOTNET_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=host.docker.internal;Database=ca-template-db;Pooling=true;
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=host.docker.internal

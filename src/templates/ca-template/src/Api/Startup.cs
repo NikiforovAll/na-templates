@@ -70,6 +70,8 @@ internal class Startup
                     options.ValidatorOptions.DisplayNameResolver =
                         SplitPascalCaseDisplayNameResolver.ResolvePropertyName;
                 });
+
+        services.AddApplicationMessageBroker(this.Configuration, default);
     }
 
     /// <summary>

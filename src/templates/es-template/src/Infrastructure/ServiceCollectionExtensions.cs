@@ -3,8 +3,11 @@
 
 namespace NikiforovAll.ES.Template.Infrastructure;
 
+using System.Reflection;
+using System.Security.Authentication;
 using Infrastructure.Services;
 using Marten;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -15,6 +18,7 @@ using NikiforovAll.ES.Template.Application.SharedKernel.Interfaces.IdGeneration;
 using NikiforovAll.ES.Template.Application.SharedKernel.Repositories;
 using NikiforovAll.ES.Template.Domain.ProjectAggregate;
 using NikiforovAll.ES.Template.Infrastructure.Ids;
+using NikiforovAll.ES.Template.Infrastructure.Options;
 using NikiforovAll.ES.Template.Infrastructure.Persistence;
 using NikiforovAll.ES.Template.Infrastructure.Persistence.Repository;
 using Weasel.Core;
@@ -84,4 +88,54 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration, string configKey = DefaultConfigKey) => configuration
             .GetSection(configKey)
             .Get<MartenConfiguration>();
+
+    /// <summary>
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <returns>The services.</returns>
+    public static IServiceCollection AddApplicationMessageBroker(
+        this IServiceCollection services, IConfiguration configuration, Assembly? assembly)
+    {
+        var options = configuration
+                .GetSection(RabbitMQConfiguration.Options)
+                .Get<RabbitMQConfiguration>();
+
+        services.Configure<RabbitMQConfiguration>(
+            configuration.GetSection(RabbitMQConfiguration.Options));
+
+        var connectionString = new Uri(options?.ToConnectionString());
+
+        services.AddMassTransit(x =>
+        {
+            if (assembly != null)
+            {
+                x.AddConsumers(assembly);
+            }
+
+            x.SetKebabCaseEndpointNameFormatter();
+
+            x.UsingRabbitMq((context, cfg) =>
+            {
+                cfg.Host(connectionString, h =>
+                {
+                    h.Username(options.Username);
+                    h.Password(options.Password);
+
+                    UseSSL(h, options);
+                });
+                cfg.ConfigureEndpoints(context);
+            });
+        });
+        services.AddMassTransitHostedService();
+
+        return services;
+
+        static void UseSSL(MassTransit.RabbitMqTransport.IRabbitMqHostConfigurator h, RabbitMQConfiguration options)
+        {
+            if (options.SSL)
+            {
+                h.UseSsl(ssl => ssl.Protocol = SslProtocols.Tls12);
+            }
+        }
+    }
 }

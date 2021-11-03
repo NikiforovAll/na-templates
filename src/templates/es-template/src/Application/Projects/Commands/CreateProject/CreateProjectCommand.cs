@@ -12,7 +12,7 @@ public class CreateProjectCommand : IRequest<Guid>
 {
     public string Name { get; set; } = default!;
 
-    public Colour Colour { get; set; } = default!;
+    public string ColourCode { get; set; } = default!;
 }
 
 public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, Guid>
@@ -26,7 +26,7 @@ public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand,
         CreateProjectCommand request,
         CancellationToken cancellationToken)
     {
-        var project = new Project(Guid.NewGuid(), request.Name, request.Colour);
+        var project = new Project(Guid.NewGuid(), request.Name, Colour.From(request.ColourCode));
 
         await this.repository.AddAsync(project, cancellationToken);
 

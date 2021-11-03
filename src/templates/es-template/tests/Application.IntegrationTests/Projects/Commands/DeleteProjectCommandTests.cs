@@ -9,6 +9,7 @@ using NikiforovAll.ES.Template.Application.Projects.Queries.GetProject;
 using NikiforovAll.ES.Template.Application.SharedKernel.Exceptions;
 using NikiforovAll.ES.Template.Domain.ProjectAggregate;
 using NikiforovAll.ES.Template.Domain.SharedKernel.Exceptions;
+using NikiforovAll.ES.Template.Domain.ValueObjects;
 using NikiforovAll.ES.Template.Tests.Common;
 
 [Trait("Category", "Integration")]
@@ -26,6 +27,7 @@ public class DeleteProjectCommandTests : IntegrationTestBase
     [Theory, AutoData]
     public async Task ProjectExists_DeletedFromDocumentsByNotFromEventSource(CreateProjectCommand command)
     {
+        command.ColourCode = Colour.Red;
         var projectId = await SendAsync(command);
 
         await SendAsync(new DeleteProjectCommand { Id = projectId });
@@ -46,6 +48,7 @@ public class DeleteProjectCommandTests : IntegrationTestBase
     [Theory, AutoData]
     public async Task ProjectExists_RetrieveByGetProjectByIdQuery_NotFound(CreateProjectCommand command)
     {
+        command.ColourCode = Colour.Red;
         var projectId = await SendAsync(command);
 
         await SendAsync(new DeleteProjectCommand { Id = projectId });

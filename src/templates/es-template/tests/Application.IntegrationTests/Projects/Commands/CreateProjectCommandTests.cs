@@ -6,6 +6,7 @@ namespace NikiforovAll.ES.Template.Application.IntegrationTests.Projects.Command
 using NikiforovAll.ES.Template.Application.Projects.Commands.CreateProject;
 using NikiforovAll.ES.Template.Application.SharedKernel.Exceptions;
 using NikiforovAll.ES.Template.Domain.ProjectAggregate;
+using NikiforovAll.ES.Template.Domain.ValueObjects;
 
 [Trait("Category", "Integration")]
 public class CreateProjectCommandTests
@@ -25,6 +26,7 @@ public class CreateProjectCommandTests
     [Theory, AutoData]
     public async Task ValidCommand_ProjectCreated(CreateProjectCommand command)
     {
+        command.ColourCode = Colour.Red;
         var id = await SendAsync(command);
 
         var entity = await FindAsync<Project>(id) ?? default!;

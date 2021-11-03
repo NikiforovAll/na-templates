@@ -6,6 +6,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - EventStore__ConnectionString=PORT = 5432; HOST = host.docker.internal; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = 'es-template-db'; PASSWORD = 'postgres'; USER ID = 'postgres'
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=host.docker.internal
     ports:
       - "5001:443"
       - "5000:80"
@@ -16,3 +19,6 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Development
       - EventStore__ConnectionString=PORT = 5432; HOST = host.docker.internal; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = 'es-template-db'; PASSWORD = 'postgres'; USER ID = 'postgres'
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=host.docker.internal

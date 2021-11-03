@@ -2,17 +2,21 @@
 
 ## Technologies
 
-* ASP.NET Core 6
-* [MartenDB](https://martendb.io/)
+* [ASP.NET Core 6](https://docs.microsoft.com/en-us/aspnet/core/)
+* [FluentValidation](https://fluentvalidation.net/)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [AutoMapper](https://automapper.org/)
-* [FluentValidation](https://fluentvalidation.net/)
+* [MartenDB](https://martendb.io/)
+* [MassTransit](https://masstransit-project.com/)
+* [Docker](https://www.docker.com/)
+
+Testing:
+
 * [XUnit](https://xunit.net/)
 * [FluentAssertions](https://fluentassertions.com/)
 * [Moq](https://github.com/moq)
 * [AutoFixture](https://github.com/AutoFixture/AutoFixture)
 * [Respawn](https://github.com/jbogard/Respawn)
-* [Docker](https://www.docker.com/)
 
 ## Principles
 
@@ -61,10 +65,10 @@ Inspired by:
 TODO: [X] implement es
 TODO: [X] Add Console seeding implementation
 TODO: [X] Add Marten.Console
-TODO: [] add github ci
+TODO: [X] add github ci
 TODO: [] finish readme
 TODO: [X] dockerize
-TODO: [] add mass transit integration example for worker (optional)
+TODO: [X] add mass transit integration example for worker (optional)
 TODO: [] add example of application service, e.g: message broker publisher
 TODO: [] clear warnings
 TODO: [] ensure nullability (e.g: dtos)

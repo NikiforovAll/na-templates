@@ -4,3 +4,13 @@ GET {{NACA_URL}}/projects/
 ###
 
 GET {{NACA_URL}}/todos/search?searchTerm=Awesome
+
+###
+POST {{NACA_URL}}/projects
+Content-Type: application/json
+
+
+{
+    "name": "My Project",
+    "colourCode": "#FF5733"
+}

@@ -12,6 +12,9 @@ services:
   naca-integration-tests:
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=postgres;Database=ca-template-db;Pooling=true;
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=rabbitmq
     entrypoint: ["/bin/sh","-c"]
     command:
       - |
@@ -28,6 +31,9 @@ services:
   naes-integration-tests:
     environment:
       - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db.tests; PASSWORD = postgres; USER ID = postgres
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=rabbitmq
     entrypoint: ["/bin/sh","-c"]
     command:
       - |

@@ -5,16 +5,19 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=rabbitmq
       - Serilog__WriteTo__1__Name=Seq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   naca.worker:
     environment:
       - DOTNET_ENVIRONMENT=Development
-      - RabbitMQConfiguration__Host=rabbitmq
+      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
-      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - RabbitMQConfiguration__Host=rabbitmq
       - Serilog__WriteTo__1__Name=Seq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
@@ -22,16 +25,19 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
+      - RabbitMQConfiguration__UserName=admin
+      - RabbitMQConfiguration__Password=admin
+      - RabbitMQConfiguration__Host=rabbitmq
       - Serilog__WriteTo__1__Name=Seq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 
   naes.worker:
     environment:
       - DOTNET_ENVIRONMENT=Development
-      - RabbitMQConfiguration__Host=rabbitmq
+      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
-      - EventStore__ConnectionString=PORT = 5432; HOST = postgres; TIMEOUT = 15; POOLING = True; MINPOOLSIZE = 1; MAXPOOLSIZE = 100; COMMANDTIMEOUT = 20; DATABASE = es-template-db; PASSWORD = postgres; USER ID = postgres
+      - RabbitMQConfiguration__Host=rabbitmq
       - Serilog__WriteTo__1__Name=Seq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:80
 

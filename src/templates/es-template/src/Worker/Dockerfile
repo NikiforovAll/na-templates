@@ -21,6 +21,7 @@ COPY ["src/Application.SharedKernel/Application.SharedKernel.csproj", "src/Appli
 COPY ["src/Domain/Domain.csproj", "src/Domain/"]
 COPY ["src/Domain.SharedKernel/Domain.SharedKernel.csproj", "src/Domain/Domain.SharedKernel/"]
 COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
+COPY ["src/Messaging.Contracts/Messaging.Contracts.csproj", "src/Messaging.Contracts/"]
 
 RUN dotnet restore "src/Worker/Worker.csproj"
 

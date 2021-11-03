@@ -12,6 +12,9 @@
     <PackageVersion Include="MediatR" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup Label="Infrastructure">
+    <PackageVersion Include="MassTransit" Version="7.2.4" />
+    <PackageVersion Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="7.2.4" />
     <PackageVersion Include="Serilog.Enrichers.Span" Version="1.4.0" />
     <PackageVersion Include="Serilog.Exceptions" Version="7.1.0" />
     <PackageVersion Include="Serilog.Filters.Expressions" Version="2.1.0" />

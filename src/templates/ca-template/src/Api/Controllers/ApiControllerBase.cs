@@ -3,6 +3,7 @@
 
 namespace NikiforovAll.CA.Template.Api.Controllers;
 
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +16,16 @@ using Microsoft.Extensions.DependencyInjection;
 public abstract class ApiControllerBase : ControllerBase
 {
     private ISender? mediator;
+    private IPublishEndpoint? publishEndpoint;
 
     /// <summary>
     /// Mediator isntance.
     /// </summary>
     protected ISender Mediator => this.mediator ??= this.HttpContext.RequestServices.GetRequiredService<ISender>();
+
+    /// <summary>
+    /// Endpoint Provider instance.
+    /// </summary>
+    protected IPublishEndpoint PublishEndpoint =>
+        this.publishEndpoint ??= this.HttpContext.RequestServices.GetRequiredService<IPublishEndpoint>();
 }

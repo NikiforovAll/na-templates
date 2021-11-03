@@ -44,9 +44,9 @@ public class SeedProjectCommand : Command
 
             if (!this.DryRun)
             {
-                AnsiConsole.Status()
+                await AnsiConsole.Status()
                     .Spinner(Spinner.Known.Material)
-                    .Start("Inserting...", ctx => this.db.BulkInsert(projects, batchSize: 500));
+                    .Start("Inserting...", ctx => this.db.BulkInsertAsync(projects, batchSize: 500));
             }
 
             this.logger.LogInformation("Done!");

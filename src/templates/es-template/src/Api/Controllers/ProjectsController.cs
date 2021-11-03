@@ -4,10 +4,12 @@
 namespace NikiforovAll.ES.Template.Api.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
+using NikiforovAll.ES.Template.Application.Projects.Commands.CreateProject;
 using NikiforovAll.ES.Template.Application.Projects.Models;
 using NikiforovAll.ES.Template.Application.Projects.Queries.GetProject;
 using NikiforovAll.ES.Template.Application.Projects.Queries.GetProjects;
 using NikiforovAll.ES.Template.Application.SharedKernel.Models;
+using NikiforovAll.ES.Template.Messaging.Contracts;
 using NSwag.Annotations;
 
 /// <summary>
@@ -49,5 +51,30 @@ public class ProjectsController : ApiControllerBase
     {
         var request = new GetProjectByIdQuery { Id = id };
         return await this.Mediator.Send(request, cancellationToken);
+    }
+
+    /// <summary>
+    /// Creates a project.
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
+    /// <response code="200">Entity is returned.</response>
+    /// <response code="404">Entity is not found.</response>
+    /// <response code="500">Internal server error.</response>
+    [HttpPost]
+    [Route("", Name = nameof(CreateProjectAsync))]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> CreateProjectAsync(
+        CreateProjectCommand command, CancellationToken cancellationToken)
+    {
+        await this.PublishEndpoint.Publish<ICreateProject>(
+            new
+            {
+                command.Name,
+                Colour = command.ColourCode
+            }, cancellationToken);
+
+        return this.Accepted();
     }
 }

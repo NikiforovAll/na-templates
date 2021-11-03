@@ -1,8 +1,6 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-using NikiforovAll.CA.Template.Application;
-using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
 using NikiforovAll.CA.Template.Infrastructure;
 using NikiforovAll.CA.Template.Worker;
 using Serilog;
@@ -39,18 +37,8 @@ static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilde
         options.ValidateScopes = isDevelopment;
         options.ValidateOnBuild = isDevelopment;
     })
-    .ConfigureServices((hostContext, services)
-        => ConfigureServices(services, hostContext.Configuration));
-
-static IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
-{
-    services.AddApplication();
-    services.AddInfrastructure(configuration);
-    services.AddSingleton<ICurrentUserService, WorkerUserService>();
-    //services.AddMassTransit(configuration);
-
-    return services;
-}
+    .ConfigureServices((hostContext, services) =>
+        services.ConfigureServices(hostContext.Configuration));
 
 void LogLifecycle(string msg) => Log.Information(msg, applicationName, environmentName);
 

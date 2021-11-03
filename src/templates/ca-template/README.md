@@ -2,17 +2,21 @@
 
 ## Technologies
 
-* ASP.NET Core 6
-* [Entity Framework Core 6](https://docs.microsoft.com/en-us/ef/core/)
+* [ASP.NET Core 6](https://docs.microsoft.com/en-us/aspnet/core/)
+* [FluentValidation](https://fluentvalidation.net/)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [AutoMapper](https://automapper.org/)
-* [FluentValidation](https://fluentvalidation.net/)
+* [Entity Framework Core 6](https://docs.microsoft.com/en-us/ef/core/)
+* [MassTransit](https://masstransit-project.com/)
+* [Docker](https://www.docker.com/)
+
+Testing:
+
 * [XUnit](https://xunit.net/)
 * [FluentAssertions](https://fluentassertions.com/)
 * [Moq](https://github.com/moq)
 * [AutoFixture](https://github.com/AutoFixture/AutoFixture)
 * [Respawn](https://github.com/jbogard/Respawn)
-* [Docker](https://www.docker.com/)
 
 ## Principles
 
@@ -63,11 +67,11 @@ TODO: [X] fix formatting in csproj file, should be consistent
 TODO: [X] migrate to latest and greatest, e.g: fluent validation, dotnet-outdated
 TODO: [X] add unit tests
 TODO: [X] add integrations tests
-TODO: [] add github ci
+TODO: [X] add github ci
 TODO: [] finish readme
 TODO: [X] dockerize
 TODO: [X] cleanup appsettings.json
-TODO: [] add mass transit integration example for worker (optional)
+TODO: [X] add mass transit integration example for worker (optional)
 TODO: [] add example of application service, e.g: message broker publisher
 TODO: [] clear warnings
 TODO: [] ensure nullability (e.g: dtos)

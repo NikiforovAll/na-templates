@@ -11,6 +11,9 @@
     <PackageVersion Include="Ardalis.Specification.EntityFrameworkCore" Version="5.1.0" />
   </ItemGroup>
   <ItemGroup Label="Infrastructure">
+    <PackageVersion Include="MassTransit" Version="7.2.4" />
+    <PackageVersion Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="7.2.4" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0-rc.2" />
     <PackageVersion Include="Serilog.Enrichers.Span" Version="1.4.0" />
     <PackageVersion Include="Serilog.Exceptions" Version="7.1.0" />
@@ -20,6 +23,7 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageVersion Include="Serilog.Sinks.Seq" Version="5.0.1" />
     <PackageVersion Include="Serilog" Version="2.10.0" />
+    
   </ItemGroup>
   <ItemGroup Label="Api">
     <PackageVersion Include="FluentValidation.AspNetCore" Version="10.3.4" />

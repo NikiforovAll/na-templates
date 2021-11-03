@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>NikiforovAll.CA.Template.Messaging.Contracts</RootNamespace>
+    <AssemblyName>NikiforovAll.CA.Template.Messaging.Contracts</AssemblyName>
+  </PropertyGroup>
+
+</Project>

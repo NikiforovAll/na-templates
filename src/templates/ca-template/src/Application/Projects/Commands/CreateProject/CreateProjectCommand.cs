@@ -14,7 +14,7 @@ public class CreateProjectCommand : IRequest<ProjectViewModel>
 {
     public string Name { get; set; } = default!;
 
-    public Colour Colour { get; set; } = default!;
+    public string ColourCode { get; set; } = default!;
 }
 
 public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, ProjectViewModel>
@@ -37,5 +37,5 @@ public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand,
     }
 
     public static Project MapFrom(CreateProjectCommand command) =>
-        new(command.Name, command.Colour);
+        new(command.Name, Colour.From(command.ColourCode));
 }
