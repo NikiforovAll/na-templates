@@ -12,6 +12,8 @@
     <PackageVersion Include="MediatR" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup Label="Infrastructure">
+    <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="5.0.2" />
+    <PackageVersion Include="AspNetCore.HealthChecks.Rabbitmq" Version="5.0.1" />
     <PackageVersion Include="MassTransit" Version="7.2.4" />
     <PackageVersion Include="MassTransit.AspNetCore" Version="7.2.4" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="7.2.4" />

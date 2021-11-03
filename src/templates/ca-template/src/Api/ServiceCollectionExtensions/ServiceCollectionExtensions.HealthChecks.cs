@@ -3,9 +3,10 @@
 
 namespace NikiforovAll.CA.Template.Api;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NikiforovAll.CA.Template.Infrastructure.Options;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using NikiforovAll.CA.Template.Infrastructure.Persistence;
 
 internal static partial class ServiceCollectionExtensions
 {
@@ -14,17 +15,35 @@ internal static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The services. </param>
     /// <returns>The services with health check services added.</returns>
-    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
+    /// <param name="configuration"></param>
+    public static IServiceCollection AddCustomHealthChecks(
+        this IServiceCollection services, IConfiguration configuration)
     {
         // Add health checks for external dependencies here.
         // See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 
-        services
-            .AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>(
-                name: "Database",
+        var databaseConnectionString = configuration
+            .GetConnectionString("DefaultConnection");
+
+        var messageBrokerOptions = configuration
+            .GetSection(RabbitMQConfiguration.Options)
+            .Get<RabbitMQConfiguration>() ?? new RabbitMQConfiguration();
+
+        var tags = new string[] { "services" };
+        var timeout = TimeSpan.FromSeconds(1);
+        services.AddHealthChecks()
+            .AddNpgSql(
+                databaseConnectionString,
+                name: "postgres",
                 failureStatus: HealthStatus.Degraded,
-                tags: new string[] { "services" });
+                timeout: timeout,
+                tags: tags)
+            .AddRabbitMQ(
+                messageBrokerOptions.ToConnectionString(),
+                name: "rabbitmq",
+                failureStatus: HealthStatus.Degraded,
+                timeout: timeout,
+                tags: tags);
 
         return services;
     }

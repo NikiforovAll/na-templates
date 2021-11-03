@@ -42,7 +42,7 @@ internal class Startup
 
         services.AddInfrastructure(this.Configuration);
 
-        services.AddCustomHealthChecks();
+        services.AddCustomHealthChecks(this.Configuration);
 
         services
             .AddHostingOptions()
