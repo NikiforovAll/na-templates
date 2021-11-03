@@ -24,6 +24,7 @@ public class PaginatedList<T>
 
     public bool HasNextPage => this.PageIndex < this.TotalPages;
 
+#pragma warning disable CA1000
     public static async Task<PaginatedList<T>> CreateAsync(
         IQueryable<T> source, int pageIndex, int pageSize)
     {
@@ -36,3 +37,4 @@ public class PaginatedList<T>
             paged.PageSize);
     }
 }
+#pragma warning restore CA1000

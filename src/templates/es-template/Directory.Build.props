@@ -3,10 +3,10 @@
     <LangVersion>preview</LangVersion>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-    <NoWarn>VSTHRD111;$(NoWarn)</NoWarn>
+    <NoWarn>VSTHRD111;CA1716;CA1711;$(NoWarn)</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Label="Authoring">

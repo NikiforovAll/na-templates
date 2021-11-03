@@ -13,7 +13,10 @@ declare -A FOLDERS=(
 for REPOSITORY in ${REPOSITORIES[*]}
 do
     case "$1" in
-    -g) rm -rf "${FOLDERS[$REPOSITORY]}"/.git ;;
+    -g)
+        rm -rf "${FOLDERS[$REPOSITORY]}"/.git
+        git restore "${FOLDERS[$REPOSITORY]}/.template.config"
+        ;;
     *) rm -rf "${FOLDERS[$REPOSITORY]}" ;;
     esac
 done

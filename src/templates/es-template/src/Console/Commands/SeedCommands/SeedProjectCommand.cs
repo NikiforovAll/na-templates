@@ -9,7 +9,7 @@ using Marten;
 using Microsoft.Extensions.Logging;
 using Spectre.Console;
 
-public class SeedProjectCommand : Command
+public partial class SeedProjectCommand : Command
 {
     public SeedProjectCommand()
         : base(name: "seed-projects", "Seeds projects into database as documents.")
@@ -21,11 +21,14 @@ public class SeedProjectCommand : Command
             description: "The number of projects."));
     }
 
-    public class Run : ICommandHandler
+    public partial class Run : ICommandHandler
     {
         private readonly ILogger<Run> logger;
 
         private readonly IDocumentStore db;
+
+        [LoggerMessage(0, LogLevel.Information, "Done!")]
+        partial void LogDone();
 
         public Run(ILogger<Run> logger, IDocumentStore db)
         {
@@ -49,7 +52,7 @@ public class SeedProjectCommand : Command
                     .Start("Inserting...", ctx => this.db.BulkInsertAsync(projects, batchSize: 500));
             }
 
-            this.logger.LogInformation("Done!");
+            this.LogDone();
 
             return 0;
         }
