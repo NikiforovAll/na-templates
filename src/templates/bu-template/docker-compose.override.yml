@@ -4,7 +4,7 @@ services:
   naca.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=postgres;Database=ca-template-db;Pooling=true;
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
       - RabbitMQConfiguration__Host=rabbitmq
@@ -14,7 +14,7 @@ services:
   naca.worker:
     environment:
       - DOTNET_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection="User ID=postgres;Password=postgres;Server=localhost;Database=ca-template-db;Pooling=true;"
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=postgres;Database=ca-template-db;Pooling=true;
       - RabbitMQConfiguration__UserName=admin
       - RabbitMQConfiguration__Password=admin
       - RabbitMQConfiguration__Host=rabbitmq

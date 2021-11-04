@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
+    <PackageReference Include="Npgsql" />
     <PackageReference Include="NSwag.AspNetCore" />
     <PackageReference Include="Serilog.AspNetCore" />
   </ItemGroup>
