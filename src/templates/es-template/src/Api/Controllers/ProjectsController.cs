@@ -68,7 +68,7 @@ public class ProjectsController : ApiControllerBase
     public async Task<ActionResult> CreateProjectAsync(
         CreateProjectCommand command, CancellationToken cancellationToken)
     {
-        await this.PublishEndpoint.Publish<ICreateProject>(
+        await this.PublishEndpoint.Publish<CreateProject>(
             new
             {
                 command.Name,

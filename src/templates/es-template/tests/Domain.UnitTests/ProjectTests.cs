@@ -26,7 +26,7 @@ public class ProjectTests
                 .Which.Message.Contains(nameof(Project.Name));
 
     [Theory, AutoProjectData]
-    public void AddItem_AddedSucessfully(Project project, ToDoItem item)
+    public void AddItem_AddedSuccessfully(Project project, ToDoItem item)
     {
         item.ProjectId = project.Id;
         project.AddItem(item);

@@ -11,6 +11,7 @@ using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using NikiforovAll.ES.Template.Application.Interfaces;
 using NikiforovAll.ES.Template.Application.SharedKernel.Events;
 using NikiforovAll.ES.Template.Application.SharedKernel.Events.External;
 using NikiforovAll.ES.Template.Application.SharedKernel.Interfaces;
@@ -37,9 +38,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IApplicationDocumentStore, MartenDocumentStore>();
 
         services.TryAddScoped<IEventBus, EventBus>();
-        services.TryAddScoped<IExternalEventProducer, DummyExternalEventsProducer>();
+        services.TryAddScoped<IExternalEventProducer, ExternalEventProducer>();
 
         services.AddTransient<IDateTime, DateTimeService>();
+        services.AddTransient<IEmailSender, NoOpEmailSender>();
 
         return services;
     }

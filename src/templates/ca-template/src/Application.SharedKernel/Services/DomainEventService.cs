@@ -1,7 +1,7 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace NikiforovAll.CA.Template.Infrastructure.Services;
+namespace NikiforovAll.CA.Template.Application.SharedKernel.Services;
 
 using System.Threading.Tasks;
 using MediatR;
@@ -34,6 +34,8 @@ public class DomainEventService : IDomainEventService
         }
     }
 
-    private static INotification? GetNotificationCorrespondingToDomainEvent(DomainEvent domainEvent) =>
-        Activator.CreateInstance(typeof(DomainEventNotification<>).MakeGenericType(domainEvent.GetType()), domainEvent) as INotification;
+    private static INotification? GetNotificationCorrespondingToDomainEvent(
+        DomainEvent domainEvent) =>
+            Activator.CreateInstance(typeof(DomainEventNotification<>)
+                .MakeGenericType(domainEvent.GetType()), domainEvent) as INotification;
 }

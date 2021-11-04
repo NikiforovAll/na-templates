@@ -17,18 +17,23 @@ public class CreateProjectCommand : IRequest<ProjectViewModel>
     public string ColourCode { get; set; } = default!;
 }
 
-public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, ProjectViewModel>
+public class CreateProjectCommandHandler
+    : IRequestHandler<CreateProjectCommand, ProjectViewModel>
 {
     private readonly IApplicationDbContext context;
     private readonly IMapper mapper;
 
-    public CreateProjectCommandHandler(IApplicationDbContext context, IMapper mapper)
+    public CreateProjectCommandHandler(
+        IApplicationDbContext context, IMapper mapper)
     {
-        this.context = context ?? throw new ArgumentNullException(nameof(context));
-        this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        this.context = context
+            ?? throw new ArgumentNullException(nameof(context));
+        this.mapper = mapper
+            ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<ProjectViewModel> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+    public async Task<ProjectViewModel> Handle(
+        CreateProjectCommand request, CancellationToken cancellationToken)
     {
         var entity = MapFrom(request);
         this.context.Projects.Add(entity);

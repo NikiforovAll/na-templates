@@ -3,6 +3,7 @@
 
 namespace NikiforovAll.CA.Template.Application.IntegrationTests;
 
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using NikiforovAll.CA.Template.Api;
+using NikiforovAll.CA.Template.Application.SharedKernel.Events.External;
 using NikiforovAll.CA.Template.Infrastructure.Persistence;
 using Npgsql;
 using Respawn;
@@ -36,8 +38,9 @@ public class SliceFixture
         var services = new ServiceCollection();
 
         services.AddLogging();
-
         startup.ConfigureServices(services);
+        services.StubApplicationMessageBroker();
+        services.AddScoped<IExternalEventProducer, NoOpExternalEventProducer>();
 
         var provider = services.BuildServiceProvider();
         ScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();

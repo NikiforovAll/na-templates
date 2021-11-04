@@ -6,5 +6,5 @@ namespace NikiforovAll.CA.Template.Domain.ProjectAggregate.Events;
 using NikiforovAll.CA.Template.Domain.ProjectAggregate;
 using NikiforovAll.CA.Template.Domain.SharedKernel;
 
-public record ToDoItemCompletedEvent(ToDoItem CompletedItem) : DomainEvent
+public record ProjectCreatedEvent(Project Project) : DomainEvent
 { }

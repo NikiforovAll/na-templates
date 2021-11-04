@@ -8,14 +8,14 @@ using MediatR;
 using NikiforovAll.ES.Template.Application.Projects.Commands.MarkComplete;
 using NikiforovAll.ES.Template.Messaging.Contracts;
 
-public class MarkToDoItemCompleteConsumer : IConsumer<IMarkToDoItemComplete>
+public class MarkToDoItemCompleteConsumer : IConsumer<MarkToDoItemComplete>
 {
     private readonly IMediator mediator;
 
     public MarkToDoItemCompleteConsumer(IMediator mediator) =>
         this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
-    public async Task Consume(ConsumeContext<IMarkToDoItemComplete> context)
+    public async Task Consume(ConsumeContext<MarkToDoItemComplete> context)
     {
         var message = context.Message;
         var command = new MarkCompleteCommand

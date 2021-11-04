@@ -1,4 +1,4 @@
-﻿// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
+// Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
 namespace NikiforovAll.CA.Template.Domain.ProjectAggregate;
@@ -17,13 +17,15 @@ public class ToDoItem : IHasDomainEvent
 
     public bool IsDone { get; private set; }
 
-    public List<DomainEvent> DomainEvents { get; private set; } = new();
+    private readonly List<DomainEvent> domainEvents = new();
+
+    public IEnumerable<DomainEvent> DomainEvents => this.domainEvents.AsReadOnly();
 
     public void MarkComplete()
     {
         this.IsDone = true;
 
-        this.DomainEvents.Add(new ToDoItemCompletedEvent(this));
+        this.domainEvents.Add(new ToDoItemCompletedEvent(this));
     }
 
     public override string ToString()

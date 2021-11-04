@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup Label="Common">
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.0.63" />
+    <PackageVersion Include="MassTransit.Analyzers" Version="7.2.4" />
   </ItemGroup>
   <ItemGroup Label="Tools">
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0-rc.2.21480.5"/>

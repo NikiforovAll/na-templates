@@ -59,19 +59,3 @@ Inspired by:
 * <https://github.com/JasonTaylorDev/CleanArchitecture>
 * <https://github.com/ardalis/cleanarchitecture>
 * <https://github.com/dotnet-architecture/eShopOnContainers>
-
-## TODO
-
-TODO: [X] implement es
-TODO: [X] Add Console seeding implementation
-TODO: [X] Add Marten.Console
-TODO: [X] add github ci
-TODO: [] finish readme
-TODO: [X] dockerize
-TODO: [X] add mass transit integration example for worker (optional)
-TODO: [] add example of application service, e.g: message broker publisher
-TODO: [X] clear warnings
-TODO: [X] ensure nullability (e.g: dtos)
-TODO: [] add diagram for solution structure, add docs about DDD, CQRS, Clean Architecture (typescript CA/DDD project has nice diagram)
-TODO: [] add getting started guide: how to setup project, create and seed database, etc.
-TODO: [X] TreatWarningsAsErrors

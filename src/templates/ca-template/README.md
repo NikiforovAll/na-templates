@@ -57,24 +57,3 @@ Inspired by:
 * <https://github.com/JasonTaylorDev/CleanArchitecture>
 * <https://github.com/ardalis/cleanarchitecture>
 * <https://github.com/dotnet-architecture/eShopOnContainers>
-
-## TODO
-
-
-TODO: [X] ManagePackageVersionsCentrally
-TODO: [X] Move logging to infra
-TODO: [X] fix formatting in csproj file, should be consistent
-TODO: [X] migrate to latest and greatest, e.g: fluent validation, dotnet-outdated
-TODO: [X] add unit tests
-TODO: [X] add integrations tests
-TODO: [X] add github ci
-TODO: [] finish readme
-TODO: [X] dockerize
-TODO: [X] cleanup appsettings.json
-TODO: [X] add mass transit integration example for worker (optional)
-TODO: [] add example of application service, e.g: message broker publisher
-TODO: [X] clear warnings
-TODO: [X] ensure nullability (e.g: dtos)
-TODO: [] add diagram for solution structure, add docs about DDD, CQRS, Clean Architecture (typescript CA/DDD project has nice diagram)
-TODO: [] add getting started guide: how to setup project, create and seed database, etc.
-TODO: [X] TreatWarningsAsErrors

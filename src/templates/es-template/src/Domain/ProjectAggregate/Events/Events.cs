@@ -9,7 +9,9 @@ public static class Events
 {
     public static class V1
     {
-        public record ProjectCreated : IEvent
+        // TODO: evaluate if you really want to expose domain events to external world.
+        // Usually, you want to decouple these two.
+        public record ProjectCreated : IExternalEvent
         {
             public Guid Id { get; init; }
 

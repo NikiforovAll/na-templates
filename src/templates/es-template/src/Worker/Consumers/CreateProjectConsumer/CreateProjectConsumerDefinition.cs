@@ -10,6 +10,10 @@ using MassTransit.Definition;
 public class CreateProjectConsumerDefinition
     : ConsumerDefinition<CreateProjectConsumer>
 {
+    public CreateProjectConsumerDefinition()
+    {
+        this.EndpointName = "create-project-es";
+    }
     protected override void ConfigureConsumer(
         IReceiveEndpointConfigurator endpointConfigurator,
         IConsumerConfigurator<CreateProjectConsumer> consumerConfigurator)

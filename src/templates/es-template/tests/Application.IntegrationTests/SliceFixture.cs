@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using NikiforovAll.ES.Template.Api;
+using NikiforovAll.ES.Template.Application.SharedKernel.Events.External;
 using NikiforovAll.ES.Template.Application.SharedKernel.Repositories;
 using NikiforovAll.ES.Template.Domain.ProjectAggregate;
 using NikiforovAll.ES.Template.Domain.SharedKernel.Aggregates;
@@ -45,6 +46,8 @@ public class SliceFixture
         services.AddLogging();
 
         startup.ConfigureServices(services);
+        services.StubApplicationMessageBroker();
+        services.AddScoped<IExternalEventProducer, NoOpExternalEventProducer>();
 
         // ! REPLACES projections, used for testing purposes
         services.AddMarten(Configuration,

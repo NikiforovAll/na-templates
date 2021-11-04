@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NikiforovAll.CA.Template.Application.Interfaces;
+using NikiforovAll.CA.Template.Application.SharedKernel.Events.External;
 using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
 using NikiforovAll.CA.Template.Infrastructure.Options;
 using NikiforovAll.CA.Template.Infrastructure.Persistence;
@@ -26,9 +27,11 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
-        services.AddScoped<IDomainEventService, DomainEventService>();
-
         services.AddTransient<IDateTime, DateTimeService>();
+
+        services.AddTransient<IEmailSender, NoOpEmailSender>();
+
+        services.AddScoped<IExternalEventProducer, ExternalEventProducer>();
 
         return services;
     }

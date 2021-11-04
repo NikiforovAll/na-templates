@@ -8,14 +8,14 @@ using MediatR;
 using NikiforovAll.CA.Template.Application.Projects.Commands.CreateProject;
 using NikiforovAll.CA.Template.Messaging.Contracts;
 
-public class CreateProjectConsumer : IConsumer<ICreateProject>
+public class CreateProjectConsumer : IConsumer<CreateProject>
 {
     private readonly IMediator mediator;
 
     public CreateProjectConsumer(IMediator mediator) =>
         this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
 
-    public async Task Consume(ConsumeContext<ICreateProject> context)
+    public async Task Consume(ConsumeContext<CreateProject> context)
     {
         var message = context.Message;
         var command = new CreateProjectCommand

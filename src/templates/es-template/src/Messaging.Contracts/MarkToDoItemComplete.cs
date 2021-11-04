@@ -1,11 +1,11 @@
 // Copyright (c) Oleksii Nikiforov, 2021. All rights reserved.
 // Licensed under the Apache 2.0 license. See the LICENSE file in the project root for full license information.
 
-namespace NikiforovAll.CA.Template.Messaging.Contracts;
+namespace NikiforovAll.ES.Template.Messaging.Contracts;
 
-public interface ICreateProject
+public interface MarkToDoItemComplete
 {
-    public string Name { get; }
+    public Guid ProjectId { get; }
 
-    public string Colour { get; }
+    public int ItemId { get; }
 }

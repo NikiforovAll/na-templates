@@ -87,7 +87,7 @@ dotnet_diagnostic.IDE0011.severity = error
 # IDE0040 AddAccessibilityModifiers
 dotnet_diagnostic.IDE0040.severity = error
 # IDE0060 UnusedParameter
-dotnet_diagnostic.IDE0060.severity = error
+dotnet_diagnostic.IDE0060.severity = suggestion
 # IDE0036 Order modifiers
 dotnet_diagnostic.IDE0036.severity = error
 # IDE0059 Remove unnecessary value assignment

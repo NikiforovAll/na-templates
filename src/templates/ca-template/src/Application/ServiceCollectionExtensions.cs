@@ -7,7 +7,9 @@ using System.Reflection;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using NikiforovAll.CA.Template.Application.SharedKernel.Interfaces;
 using NikiforovAll.CA.Template.Application.SharedKernel.PipelineBehaviors;
+using NikiforovAll.CA.Template.Application.SharedKernel.Services;
 
 public static class ServiceCollectionExtensions
 {
@@ -20,6 +22,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+
+        services.AddScoped<IDomainEventService, DomainEventService>();
 
         return services;
     }

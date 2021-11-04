@@ -21,6 +21,9 @@ public class ProjectTests
         project.Colour.Should().Be(colour);
         project.Name.Should().Be(name);
         project.Items.Should().BeEmpty();
+        project.DomainEvents.OfType<ProjectCreatedEvent>()
+            .Should().ContainSingle()
+                .Which.Project.Equals(project);
     }
 
     [Fact]
@@ -30,14 +33,15 @@ public class ProjectTests
                 .Which.Message.Contains(nameof(Project.Name));
 
     [Theory, AutoData]
-    public void AddItem_AddedSucessfully(Project project, ToDoItem item)
+    public void AddItem_AddedSuccessfully(Project project, ToDoItem item)
     {
         project.AddItem(item);
 
         project.Items.Should().ContainEquivalentOf(item);
         project.Items.Should().HaveCount(1);
-        project.DomainEvents.Should().ContainSingle()
-            .Which.GetType().Name.Should().Be(nameof(NewItemAddedEvent));
+        project.DomainEvents.OfType<NewItemAddedEvent>()
+            .Should().ContainSingle()
+                .Which.Project.Equals(project);
     }
 
     [Theory, AutoData]

@@ -4,9 +4,9 @@
 namespace NikiforovAll.ES.Template.Application.SharedKernel.Events.External;
 
 using System.Threading.Tasks;
-using NikiforovAll.ES.Template.Application.SharedKernel.Events;
+using NikiforovAll.ES.Template.Domain.SharedKernel.Events;
 
-public class DummyExternalEventsProducer : IExternalEventProducer
+public class NoOpExternalEventProducer : IExternalEventProducer
 {
     public Task PublishAsync(IExternalEvent @event) => Task.CompletedTask;
 }

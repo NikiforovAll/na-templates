@@ -21,7 +21,9 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
 
     public ProjectStatus Status => this.items.All(i => i.IsDone) ? ProjectStatus.Complete : ProjectStatus.InProgress;
 
-    public List<DomainEvent> DomainEvents { get; private set; } = new();
+    private readonly List<DomainEvent> domainEvents = new();
+
+    public IEnumerable<DomainEvent> DomainEvents => this.domainEvents.AsReadOnly();
 
     /// <summary>
     /// EF required
@@ -41,6 +43,7 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
         }
         this.Name = name;
         this.Colour = colour;
+        this.domainEvents.Add(new ProjectCreatedEvent(this));
     }
 
     public void AddItem(ToDoItem newItem)
@@ -53,7 +56,7 @@ public class Project : AuditableEntity, IHasDomainEvent, IAggregateRoot
         this.items.Add(newItem);
 
         var newItemAddedEvent = new NewItemAddedEvent(this, newItem);
-        this.DomainEvents.Add(newItemAddedEvent);
+        this.domainEvents.Add(newItemAddedEvent);
     }
 
     public void UpdateName(string newName)

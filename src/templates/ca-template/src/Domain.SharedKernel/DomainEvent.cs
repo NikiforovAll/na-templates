@@ -5,10 +5,10 @@ namespace NikiforovAll.CA.Template.Domain.SharedKernel;
 
 public interface IHasDomainEvent
 {
-    public List<DomainEvent> DomainEvents { get; }
+    public IEnumerable<DomainEvent> DomainEvents { get; }
 }
 
-public abstract class DomainEvent
+public abstract record class DomainEvent
 {
     protected DomainEvent() => this.DateOccurred = DateTimeOffset.UtcNow;
     public bool IsPublished { get; set; }

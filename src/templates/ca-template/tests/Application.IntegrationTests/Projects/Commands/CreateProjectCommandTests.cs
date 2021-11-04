@@ -6,6 +6,7 @@ namespace NikiforovAll.CA.Template.Application.IntegrationTests.Projects.Command
 using NikiforovAll.CA.Template.Application.Projects.Commands.CreateProject;
 using NikiforovAll.CA.Template.Application.SharedKernel.Exceptions;
 using NikiforovAll.CA.Template.Domain.ProjectAggregate;
+using NikiforovAll.CA.Template.Domain.ProjectAggregate.Events;
 using NikiforovAll.CA.Template.Domain.ValueObjects;
 
 [Trait("Category", "Integration")]
@@ -35,6 +36,7 @@ public class CreateProjectCommandTests
         entity.Name.Should().Be(command.Name);
         entity.Status.Should().Be(ProjectStatus.Complete);
         entity.Items.Should().BeEmpty();
-        entity.Created.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+        entity.Created.Should().BeCloseTo(
+            DateTime.UtcNow, TimeSpan.FromSeconds(10));
     }
 }
