@@ -1,0 +1,21 @@
+{
+  "ReverseProxy": {
+    "Clusters": {
+      "BackendApi": {
+        "Destinations": {
+          "Server1": {
+            "Address": "http://localhost:5000"
+          }
+        }
+      }
+    },
+    "Routes": {
+      "ServerRoute1": {
+        "ClusterId": "BackendApi",
+        "Match": {
+          "Path": "{**catch-all}"
+        }
+      }
+    }
+  }
+}

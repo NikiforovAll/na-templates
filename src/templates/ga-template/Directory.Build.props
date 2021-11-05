@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup Label="Build">
+    <LangVersion>preview</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors> 
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <NoWarn>VSTHRD111;$(NoWarn)</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Authoring">
+    <Authors>Oleksii Nikiforov</Authors>
+  </PropertyGroup>
+</Project>

@@ -2,11 +2,13 @@
 REPOSITORIES=(
   "na-ca"
   "na-es"
+  "na-ga"
 )
 
 declare -A FOLDERS=(
   ["na-es"]="na-es"
   ["na-ca"]="na-ca"
+  ["na-ga"]="na-ga"
 ) 
 
 for REPOSITORY in ${REPOSITORIES[*]}

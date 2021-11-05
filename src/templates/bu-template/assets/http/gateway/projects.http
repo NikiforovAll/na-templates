@@ -1,0 +1,35 @@
+
+@es_prefix=es/api
+@ca_prefix=ca/api
+
+
+# Clean Architecture
+
+###
+GET {{NAGA_URL}}/{{ca_prefix}}/projects/
+
+###
+POST {{NAGA_URL}}/{{ca_prefix}}/projects
+Content-Type: application/json
+
+
+{
+    "name": "Clean Architecture Tasks",
+    "colourCode": "#FFFFFF"
+}
+
+
+# Event Sourcing
+
+###
+GET {{NAGA_URL}}/{{es_prefix}}/projects/
+
+###
+POST {{NAGA_URL}}/{{es_prefix}}/projects
+Content-Type: application/json
+
+
+{
+    "name": "Event Sourcing Tasks",
+    "colourCode": "#FF5733"
+}

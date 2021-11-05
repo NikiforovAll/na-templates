@@ -1,10 +1,16 @@
 #!/bin/bash
 
 REPOSITORIES=(
-  ca-template
+  na-ca
+  na-es
+  na-bu
+  na-ga
 )
 declare -A FOLDERS=(
-  ["ca-template"]="src/templates/ca-template"
+  ["na-ca"]="src/templates/ca-template"
+  ["na-es"]="src/templates/es-template"
+  ["na-bu"]="src/templates/bu-template"
+  ["na-ga"]="src/templates/ga-template"
 )
 
 for REPOSITORY in ${REPOSITORIES[*]}

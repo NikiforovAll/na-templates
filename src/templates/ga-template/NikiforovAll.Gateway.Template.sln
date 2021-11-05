@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31825.309
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B19C455F-D74F-43DC-AC2B-9390A2CC8465}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{570D9525-CA79-4688-8BBD-2102183801E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "src\Gateway\Gateway.csproj", "{9AF8820A-6736-4A21-988F-4F7BE9D366FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AF8820A-6736-4A21-988F-4F7BE9D366FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF8820A-6736-4A21-988F-4F7BE9D366FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF8820A-6736-4A21-988F-4F7BE9D366FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF8820A-6736-4A21-988F-4F7BE9D366FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AF8820A-6736-4A21-988F-4F7BE9D366FA} = {570D9525-CA79-4688-8BBD-2102183801E6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EE491CF-DE97-4615-9679-AD617FCEEDE6}
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,18 @@
 version: "3.9"
 
 services:
+  naga.gateway:
+    image: ${REGISTRY:-nikiforovall}/naga-gateway:${TAG:-latest}
+    build:
+      context: na-ga
+      dockerfile: src/Gateway/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "3000:80"
+    volumes:
+      - ./routes.conf.json:/app/routes.conf.json
+
   naca.api:
     image: ${REGISTRY:-nikiforovall}/naca-api:${TAG:-latest}
     build:

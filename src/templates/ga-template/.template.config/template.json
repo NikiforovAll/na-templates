@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Oleksii Nikiforov",
+  "classifications": [
+    "gateway",
+    "Template"
+  ],
+  "identity": "NikiforovAll.Gateway.Template",
+  "name": "Gateway Template",
+  "description": "Creates a gateway.",
+  "shortName": "na-ga",
+  "sourceName": "NikiforovAll.GA.Template",
+  "preferNameDirectory": true,
+  "defaultName": "gateway",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {},
+  "guids": [
+    "2150E333-8FDC-42A3-9474-1A3956D46DE8",
+    "570D9525-CA79-4688-8BBD-2102183801E6",
+    "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
+    "9AF8820A-6736-4A21-988F-4F7BE9D366FA"
+  ],
+  "sources": [],
+  "postActions": []
+}

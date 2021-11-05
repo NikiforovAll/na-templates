@@ -1,0 +1,22 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.100-rc.2.21505.57
+    - name: Restore dependencies
+      run: dotnet restore ./NikiforovAll.Gateway.Template.sln
+    - name: Build
+      run: dotnet build --no-restore ./NikiforovAll.Gateway.Template.sln

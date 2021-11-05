@@ -1,0 +1,44 @@
+{
+  "ReverseProxy": {
+    "Clusters": {
+      "ca-api": {
+        "Destinations": {
+          "Server1": {
+            "Address": "http://naca.api"
+          }
+        }
+      },
+      "es-api": {
+        "Destinations": {
+          "Server1": {
+            "Address": "http://naes.api"
+          }
+        }
+      }
+    },
+    "Routes": {
+      "ServerRoute1": {
+        "ClusterId": "ca-api",
+        "Match": {
+          "Path": "/ca/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "ca"
+          }
+        ]
+      },
+      "ServerRoute2": {
+        "ClusterId": "es-api",
+        "Match": {
+          "Path": "/es/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "es"
+          }
+        ]
+      }
+    }
+  }
+}

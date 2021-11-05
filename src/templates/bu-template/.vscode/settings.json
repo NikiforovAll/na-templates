@@ -4,6 +4,7 @@
         "mentorhub-local": {
             "NACA_URL": "http://localhost:5000/api",
             "NAES_URL": "http://localhost:5001/api",
+            "NAGA_URL": "http://localhost:3000",
         },
         "docker": {
         }
