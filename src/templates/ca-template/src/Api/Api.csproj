@@ -35,9 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>Application.IntegrationTests</_Parameter1>
-    </AssemblyAttribute>
+    <InternalsVisibleTo Include="Application.IntegrationTests" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
@@ -47,4 +45,3 @@
   </ItemGroup>
 
 </Project>
- 
